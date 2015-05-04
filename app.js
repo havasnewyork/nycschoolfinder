@@ -56,6 +56,7 @@ var pers_creds = bluemix.getServiceCreds('personality_insights', services);
 // console.log(qa_creds);
 pers_creds.version = 'v2';
 
+app.set('useTestDb', false);
 
 
 
@@ -64,7 +65,10 @@ var question_answer = watson.question_and_answer(qa_creds);
 app.persInsights = watson.personality_insights(pers_creds);
 
 var analyzer = require('./lib/school-analyzer')(app);
+var finder = require('./lib/school-finder')(app);
 
+var persUtils = require('./lib/personality-util'); // persUtils.flatten()  var traitList = flatten(data.tree),
+// persUtils.similarity(one, two);
 
 
 var Cloudant = require('cloudant')
@@ -75,12 +79,15 @@ Cloudant({account:cloudant_creds.username, password:cloudant_creds.password}, fu
   if (er)
     return console.log('Error connecting to Cloudant account %s: %s', me, er.message)
  
-  console.log('Connected to cloudant')
-  app.schooldb = cloudant.use('schools');
+  console.log('Connected to cloudant', app.get('useTestDb'));
+  var dbname = 'schools';
+  if (app.get('useTestDb')) dbname += "_test";
+  console.log('using db:', dbname);
+  app.schooldb = cloudant.use(dbname);
 
   // should put a check to see last date of analysis - no for hthon
-  console.log('starting school-analyzer:');
-  analyzer.run();
+  // console.log('starting school-analyzer:');
+  // analyzer.run(); // DO NOT RUN ALL THE TIME
 
 
 
@@ -101,10 +108,42 @@ app.get('/', function(req, res) {
 
 
 
-app.post('/search', function(req, res){
-  console.log('post form:', req.body);
-  
-  res.render('response-choice', {});
+app.post('/student/submit', function(req, res){
+  console.log('post form:', req.body.studentSample.length);
+  // if (req.body.studentSample;)
+  app.persInsights.profile({text: req.body.studentSample}, function(err, studentPersonality){
+    console.log('got a student profile:', err, studentPersonality);
+    if (err) {
+      res.render('index', {
+        error: 'got an error, try a longer input'
+      });
+      return;
+    }
+    console.log('finding matches...');
+    // TODO matching algorithm here against all schools
+    finder.findSchools(studentPersonality, function(err, matches){
+      console.log('potential school matches:', matches);
+      if (err) {
+        res.render('index', {
+          error: err.error
+        });
+        return;
+      }
+      res.render('response-choice', {
+        matches: matches,
+        studentPersonality: JSON.stringify(persUtils.flatten(studentPersonality.tree))
+      });
+
+    })
+
+    
+
+
+  })
+
+  // res.render('response-choice', {
+  //   sample: req.body.studentSample
+  // });
 });
 
 
