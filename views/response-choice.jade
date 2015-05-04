@@ -6,7 +6,7 @@ block row-content
     h2 School Matches
     ul
       each match in matches
-        //- li= JSON.stringify(match)
-        li= match.score + " score for " + match.school_name + "(" + match.id + ")"
+        //- li= JSON.stringify(match) -- match object here corresponds to the matches pushed in school-finder.js - match.doc provides full access to all school fields
+        li= match.score + " score for " + match.school_name + " (" + match.id + ") coords:" + match.doc.location_1.latitude + ":" + match.doc.location_1.longitude
     h2 Here is a personality result
     div= studentPersonality
