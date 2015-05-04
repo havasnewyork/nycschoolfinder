@@ -56,7 +56,7 @@ var pers_creds = bluemix.getServiceCreds('personality_insights', services);
 // console.log(qa_creds);
 pers_creds.version = 'v2';
 
-app.set('useTestDb', false);
+app.set('useTestDb', true);
 
 
 

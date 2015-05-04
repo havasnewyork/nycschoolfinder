@@ -3,10 +3,10 @@
 
 block row-content
   div.col-lg-6.col-md-6.col-xs-12
-    h2 Here is a personality result
-    div= studentPersonality
     h2 School Matches
     ul
       each match in matches
         //- li= JSON.stringify(match)
         li= match.score + " score for " + match.school_name + "(" + match.id + ")"
+    h2 Here is a personality result
+    div= studentPersonality
