@@ -2,42 +2,88 @@
  * This file provides css styles.
  */
 .state_F {
-background-color: #A91024; /* IBM's RED 2 */
-color: white;
-}
+  background-color: #A91024;
+  /* IBM's RED 2 */
+  color: white; }
+
 .state_D {
-background-color: #008A52; /* IBM's GREEN 1 */
-color: white;
-}
+  background-color: #008A52;
+  /* IBM's GREEN 1 */
+  color: white; }
+
 .state_R {
-background-color: #003F69; /* IBM's BLUE3 */
-color: white;
-}
+  background-color: #003F69;
+  /* IBM's BLUE3 */
+  color: white; }
+
 .state_A {
-background-color: #B8461B; /* IBM's ORANGE */
-color: white;
-}
+  background-color: #B8461B;
+  /* IBM's ORANGE */
+  color: white; }
+
 .state_G {
-background-color: #FDB813; /* IBM's YELLOW */
-color: white;
-}
+  background-color: #FDB813;
+  /* IBM's YELLOW */
+  color: white; }
 
 .errorMsg {
-	font-weight: bold;
-	color: red;
-}
+  font-weight: bold;
+  color: red; }
 
 .resultTable {
-	text-align: left;
-}
+  text-align: left; }
+
 .resultTable th {
-	padding: 0px 5px 0px 5px;
-}
+  padding: 0px 5px 0px 5px; }
 
 .concept td:hover {
-	background-color: #ccc;
-	cursor: pointer;
-}
+  background-color: #ccc;
+  cursor: pointer; }
+
 .resultTable td:first-child {
-	text-align: center;
-}
+  text-align: center; }
+
+h1 {
+  text-align: center;
+  font-weight: 900;
+  font-size: 3em; }
+
+.tagline {
+  text-align: center;
+  font-weight: 100;
+  font-size: 2em;
+  margin-bottom: 3em; }
+
+div.box {
+  border: 3px solid rgba(128, 128, 128, 0.1);
+  border-radius: 10px; }
+  div.box h3 {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0.5em 0; }
+
+ul.actions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center; }
+  ul.actions li {
+    display: inline-block;
+    margin: 1em 3em;
+    vertical-align: middle; }
+    ul.actions li.extra {
+      margin: 1em; }
+    ul.actions li .fa {
+      font-size: 100px; }
+    ul.actions li p.alt {
+      color: rgba(0, 0, 0, 0.5); }
+
+#pasteCorpus {
+  display: none;
+  margin: 0;
+  background: none;
+  border: none; }
+  #pasteCorpus textarea {
+    height: 10em; }
+
+/*# sourceMappingURL=style.css.map */

@@ -41,3 +41,57 @@ color: white;
 .resultTable td:first-child {
 	text-align: center;
 }
+
+h1 {
+	text-align: center;
+	font-weight: 900;
+	font-size: 3em;
+}
+
+.tagline {
+	text-align: center;
+	font-weight: 100;
+	font-size: 2em;
+	margin-bottom: 3em;
+}
+
+div.box {
+	border: 3px solid rgba(128, 128, 128, 0.1);
+	border-radius: 10px;
+	h3 {
+		font-size: 1.5em;
+		text-align: center;
+		margin: 0.5em 0;
+	}
+}
+
+ul.actions {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	li {
+		display: inline-block;
+		margin: 1em 3em;
+		vertical-align: middle;
+		&.extra {
+			margin: 1em;
+		}
+		.fa {
+			font-size: 100px;
+		}
+		p.alt {
+			color: rgba(0, 0, 0, 0.5);
+		}
+	}
+}
+
+#pasteCorpus {
+	display: none;
+	margin: 0;
+	background: none;
+	border: none;
+	textarea {
+		height: 10em;
+	}
+}
