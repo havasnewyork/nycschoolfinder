@@ -4,33 +4,34 @@ extends ./layout.jade
 block row-content
   h1 NYC School Finder
   h3.tagline There are #{schoolCount} High Schools in New York City. Find the right one for your child.
-  div.action.box
-    h3 Analyse your childs personality with
-    ul.actions
-      li.facebook
-        a(href='javascript:void(0);')
-          i.fa.fa-facebook
-          p.alt Facebook
-      li.twitter 
-        a(href='javascript:void(0);')
-          i.fa.fa-twitter
-          p.alt Twitter
-      li.extra or
-      li
-        a#pasteCorpusLink(href='javascript:void(0);')
-          |Write a short biography about your child, what are their interests, what are their ambitions in life. 
-    div.well#pasteCorpus
+  div.panel.panel-default.action.box#personalityEntry
+    h3(data-toggle="collapse") Analyse your child's personality
+    //- ul.actions
+    //-   li.facebook
+    //-     a(href='javascript:void(0);')
+    //-       i.fa.fa-facebook
+    //-       p.alt Facebook
+    //-   li.twitter 
+    //-     a(href='javascript:void(0);')
+    //-       i.fa.fa-twitter
+    //-       p.alt Twitter
+    //-   li.extra or
+    //-   li
+    //-     a#pasteCorpusLink(href='javascript:void(0);')
+    //-       |Write a short biography about your child, what are their interests, what are their ambitions in life. 
+    div.panel-collapse.collapse.in.well#pasteCorpus
       form.jobForm.form-horizontal(method='post', action="/student/submit")
         fieldset
           div.form-group.row
-            label.col-lg-2.col-xs-2(for='labelfield') About your child:
-            div.col-lg-10.col-xs-10
+            label.col-lg-3.col-xs-3(for='labelfield') Paste in samples of your child's writing:
+            div.col-lg-9.col-xs-9
               textarea.form-control(type='text', name='studentSample', value='', required='true')
           div.form-group.row
             div.col-lg-3.col-lg-push-9.col-xs-4
               input.btn.btn-block(type='submit', value='Analyse')
-  div.info.box
-    h3 Here are some High Schools that match you childs personality
+  div.info.box#results
+    h3(data-toggle="collapse") Here are some high schools that match you child's personality
+    div.panel-collapse.collapse.in
       ol.schools.results
         li School 1
   div.map-container

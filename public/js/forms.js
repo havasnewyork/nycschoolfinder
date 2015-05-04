@@ -30,7 +30,8 @@ $(document).ready(function(){
 			data: data,
 			success: function(data){
 				console.log('form success:');
-				$('.results').html(data);
+				$('#results').data("schools", data);
+				$('#results').trigger('resultsReady');
 				resetForm(form);
 			},
 			error: function(err) {

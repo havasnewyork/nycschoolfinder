@@ -59,9 +59,10 @@ h1 {
   text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
 
 div.box {
-  border: 3px solid rgba(128, 128, 128, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.9); }
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: opacity 0.2s; }
   div.box h3 {
     font-size: 1.5em;
     text-align: center;
@@ -86,7 +87,6 @@ ul.actions {
       color: rgba(0, 0, 0, 0.5); }
 
 #pasteCorpus {
-  display: none;
   margin: 0;
   background: none;
   border: none; }
@@ -107,7 +107,8 @@ ul.actions {
     right: 0;
     bottom: 0;
     left: 0;
-    background: linear-gradient(to bottom, black 13%, transparent 25%); }
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 12%, transparent 30%); }
 
 #map-canvas {
   position: absolute;

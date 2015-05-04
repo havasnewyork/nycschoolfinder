@@ -1,13 +1,29 @@
 (function() {
 
 	$('#pasteCorpusLink').click(showPasteCorpus);
+	$('#results').css('display', 'none').css('opacity', '0');
+	$('#results').on('resultsReady', showResults);
 
 	function showPasteCorpus() {
 		$('#pasteCorpus').css('display', 'block');
 	}
 
+	function showResults() {
+		$('#personalityEntry .collapse').collapse();
+		$('#results').css('display', 'block').css('opacity', '1');
 
-	function initialize() {
+		formatResults($('#results .schools'), $('#results').data("schools"));
+	}
+
+	function formatResults(list, data) {
+		$.each(data.matches, function(index, value) {
+			var li = $('<li/>')
+			        .text(value.school_name)
+			        .appendTo(list);
+		});
+	}
+
+	function initializeMap() {
 		var mapCanvas = document.getElementById('map-canvas');
 		var mapOptions = {
 			center: new google.maps.LatLng(40.7401, -73.8694),
@@ -16,6 +32,6 @@
 		}
 		var map = new google.maps.Map(mapCanvas, mapOptions)
 	}
-	google.maps.event.addDomListener(window, 'load', initialize);
+	google.maps.event.addDomListener(window, 'load', initializeMap);
 
 })();
