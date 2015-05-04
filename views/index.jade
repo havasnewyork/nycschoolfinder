@@ -20,18 +20,19 @@ block row-content
         a#pasteCorpusLink(href='javascript:void(0);')
           |paste in samples of your children's writing
     div.well#pasteCorpus
-      form.jobForm.form-horizontal(method='post', action="/step")
+      form.jobForm.form-horizontal(method='post', action="/student/submit")
         fieldset
           div.form-group.row
             label.col-lg-2.col-xs-2(for='labelfield') Sample writing:
             div.col-lg-10.col-xs-10
               textarea.form-control(type='text', name='studentSample', value='', required='true')
+            div.error= error
           div.form-group.row
             div.col-lg-3.col-lg-push-9.col-xs-4
               input.btn.btn-block(type='submit', value='Analyse')
   div.info.box
     h3 Here are some schools you might be interested in
-      ol.schools
+      ol.schools.results
         li School 1
   div.map-container
     div#map-canvas

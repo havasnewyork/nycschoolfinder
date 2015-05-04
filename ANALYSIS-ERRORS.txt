@@ -43,3 +43,16 @@ ERROR analyzing personality of school: 29Q327 { help: 'http://www.ibm.com/smarte
 
 
 14 total
+
+
+less than 100 words:
+
+18K633  - sampleText less than 100, not analyzing 94
+14K586  - sampleText less than 100, not analyzing 47
+14K454  - sampleText less than 100, not analyzing 90
+10X342  - sampleText less than 100, not analyzing 98
+10X268  - sampleText less than 100, not analyzing 82
+07X520  - sampleText less than 100, not analyzing 58
+05M670  - sampleText less than 100, not analyzing 74
+
+21 total missing
