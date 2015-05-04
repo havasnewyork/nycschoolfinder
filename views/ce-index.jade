@@ -1,0 +1,59 @@
+//- index.jade
+extends ./layout.jade
+
+block row-content
+  div.row
+    div.col-lg-6.col-md-6.col-xs-12
+      h2 Try the service
+      div.well
+        form.jobForm.form-horizontal(method='post')
+          fieldset
+            div.form-group.row
+              label.col-lg-2.col-xs-2(for='labelfield') Label:
+              div.col-lg-9.col-xs-10
+                input.form-control(type='text', name='label', value='drugs', required='true')
+            div.form-group.row
+              label.col-lg-2.col-xs-2(for='labelfield') Corpus:
+              div.col-lg-9.col-xs-9
+                div.radio
+                  label
+                    input(type='radio', name='dataset', value='mtsamples', checked)
+                    | Medical Transcriptions
+                    br
+                    a(href='http://www.mtsamples.com') http://www.mtsamples.com
+                div.radio
+                  label
+                    input(type='radio', name='dataset', value='twitter')
+                    | Social Media -
+                    | WARNING: Might take a couple of minutes depending on seed list
+            div.form-group.row
+              label.col-lg-2.col-xs-2(for='seeds') Seeds:
+              div.col-lg-9.col-xs-10
+                textarea#seeds.seeds.form-control(name='seeds', rows='10', required='true')
+                    |motrin
+                    |tylenol
+                    |aspirin
+            div.form-group.row
+              div.col-lg-4.col-lg-push-2.col-xs-4
+                input.btn.btn-block(onclick="window.location = './'", value='Clear')
+              div.col-lg-2.col-lg-push-3.col-xs-4.col-xs-push-4(style="height:10px;")
+              div.col-lg-4.col-lg-push-1.col-xs-4
+                input.btn.btn-block(type='submit', value='Submit')
+    div.col-lg-6.col-md-6.col-xs-12
+      div.row
+        div.form-group.col-lg-12.col-md-12.col-xs-6
+          h2 Status:
+          div.well
+            div
+              strong Job:
+              span(style='margin-left:5px;').jobId
+            div
+              strong(style='margin-right:10px;') Status:
+              span(style='padding: 0px 5px;').jobStatus
+        div.form-group.col-lg-12.col-md-12.col-xs-6
+          h2 Output:
+          div
+            div.form-group.row.loading.text-center(style='display:none')
+              img(src='images/watson.gif')
+            p.error.errorMsg.hidden
+            div.well.concepts(style='display:none')

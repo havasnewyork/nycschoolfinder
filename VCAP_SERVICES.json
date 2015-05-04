@@ -1,0 +1,87 @@
+{
+  "concept_expansion": [
+   {
+    "credentials": {
+     "password": "cx0rcGOb0q3U",
+     "services": [
+      {
+       "conceptexpansion": {
+        "name": "conceptexpansion",
+        "params": [
+         {
+          "name": "seed",
+          "type": "json_list"
+         },
+         {
+          "name": "label",
+          "type": "string"
+         },
+         {
+          "name": "dataset",
+          "type": "string"
+         }
+        ]
+       }
+      }
+     ],
+     "url": "https://gateway.watsonplatform.net/concept-expansion-beta/api",
+     "username": "a2ebb947-b1b4-456e-a653-1670969178a6"
+    },
+    "label": "concept_expansion",
+    "name": "concept-expansion-service",
+    "plan": "concept_expansion_free_plan",
+    "tags": [
+     "watson",
+     "ibm_created",
+     "ibm_beta",
+     "ibm_dedicated_public"
+    ]
+   }
+  ],
+  "question_and_answer": [
+   {
+    "credentials": {
+     "password": "IzwZS8pzg0RT",
+     "url": "https://gateway.watsonplatform.net/question-and-answer-beta/api",
+     "username": "fa438d3f-aab4-4e8c-9281-36d5609afcb5"
+    },
+    "label": "question_and_answer",
+    "name": "Question and Answer-2q",
+    "plan": "question_and_answer_free_plan",
+    "tags": [
+     "watson",
+     "ibm_created",
+     "ibm_beta",
+     "ibm_dedicated_public"
+    ]
+   }
+  ],
+  "relationship_extraction": [
+   {
+    "credentials": {
+     "password": "W8BuPudH8Nw7",
+     "sids": [
+      {
+       "description": "information extraction from Spanish news",
+       "sid": "ie-es-news"
+      },
+      {
+       "description": "information extraction from English news",
+       "sid": "ie-en-news"
+      }
+     ],
+     "url": "https://gateway.watsonplatform.net/relationship-extraction-beta/api",
+     "username": "5edba5c8-9748-42cc-9fe1-bfe833b40c90"
+    },
+    "label": "relationship_extraction",
+    "name": "Relationship Extraction-ye",
+    "plan": "relationship_extraction_free_plan",
+    "tags": [
+     "watson",
+     "ibm_created",
+     "ibm_experimental",
+     "ibm_dedicated_public"
+    ]
+   }
+  ]
+ }
