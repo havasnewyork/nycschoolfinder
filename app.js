@@ -66,6 +66,28 @@ app.persInsights = watson.personality_insights(pers_creds);
 var analyzer = require('./lib/school-analyzer')(app);
 
 
+
+var Cloudant = require('cloudant')
+ 
+var cloudant_creds = bluemix.getServiceCreds('cloudantNoSQLDB', services);
+ 
+Cloudant({account:cloudant_creds.username, password:cloudant_creds.password}, function(er, cloudant) {
+  if (er)
+    return console.log('Error connecting to Cloudant account %s: %s', me, er.message)
+ 
+  console.log('Connected to cloudant')
+  app.schooldb = cloudant.use('schools');
+
+  // should put a check to see last date of analysis - no for hthon
+  console.log('starting school-analyzer:');
+  analyzer.run();
+
+
+
+})
+
+
+
 // var qa_datasets;
 
 // question_answer.datasets({}, function(err, data){
