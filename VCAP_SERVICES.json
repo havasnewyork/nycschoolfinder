@@ -120,5 +120,23 @@
      "ibm_dedicated_public"
     ]
    }
+  ],
+  "tradeoff_analytics": [
+   {
+    "credentials": {
+     "password": "2AcWzLyEnOSE",
+     "url": "https://gateway.watsonplatform.net/tradeoff-analytics-beta/api",
+     "username": "f3f17082-5996-4688-8262-4f16fb4a1866"
+    },
+    "label": "tradeoff_analytics",
+    "name": "Tradeoff Analytics-u3",
+    "plan": "free",
+    "tags": [
+     "watson",
+     "ibm_created",
+     "ibm_beta",
+     "ibm_dedicated_public"
+    ]
+   }
   ]
  }

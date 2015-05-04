@@ -26,6 +26,10 @@ var express = require('express'),
 require('./config/express')(app);
 var services = process.env.VCAP_SERVICES ? JSON.parse(process.env.VCAP_SERVICES) : require('./VCAP_SERVICES');
 
+
+// set config flags for db usage
+app.set('useTestDb', true); // the test db only has 99 records for development speed....
+
 // // if bluemix credentials exists, then override local
 // var credentials = extend({
 //   version: 'v1', // API version
@@ -56,13 +60,22 @@ var pers_creds = bluemix.getServiceCreds('personality_insights', services);
 // console.log(qa_creds);
 pers_creds.version = 'v2';
 
-app.set('useTestDb', true);
+
+
+var tradeoff_creds = bluemix.getServiceCreds('tradeoff_analytics', services);
+// console.log(qa_creds);
+tradeoff_creds.version = 'v1';
+
+
 
 
 
 var relationship_extraction = watson.relationship_extraction(re_creds);
 var question_answer = watson.question_and_answer(qa_creds);
 app.persInsights = watson.personality_insights(pers_creds);
+
+
+app.tradeoffAnalytics = watson.tradeoff_analytics(tradeoff_creds);  // .dilemmas({columns, subject, options})
 
 var analyzer = require('./lib/school-analyzer')(app);
 var finder = require('./lib/school-finder')(app);
@@ -135,19 +148,29 @@ app.post('/student/submit', function(req, res){
     finder.findSchools(studentPersonality, function(err, matches){
       // console.log('potential school matches:', matches);
       if (err) {
-        res.render('error', {
-          error: err.error
-        });
+        res.render('error', { error: err.error });
         return;
       }
 
-      // do some munging on the student top5 compared to schools
-      // var matchedTraits = persUtils.matches(studentProfile, school.doc.watsonPersonality);
+      // do some munging on the student top5 compared to schools 
 
-      res.render('response-choice', {
-        matches: matches,
-        studentPersonality: JSON.stringify(persUtils.matches(studentPersonality), null, 4) //JSON.stringify(persUtils.flatten(studentPersonality.tree), null, 4)
+      // prepare the tradeoff setup
+      finder.tradeoff(matches, function(err, tradeoff){
+
+        if (err) {
+          res.render('error', { error: err.error });
+          return;
+        }
+
+        // res.render('response-choice', {
+        res.json({
+          matches: matches,
+          studentPersonality: persUtils.matches(studentPersonality) //JSON.stringify(persUtils.flatten(studentPersonality.tree), null, 4)
+        });
+
       });
+
+      
 
     })
 
@@ -158,6 +181,11 @@ app.post('/student/submit', function(req, res){
 
 
 });
+
+app.post('/schools/compare', function(req, res) {
+  // set up a tradeoff analytics from a set of schools
+  // ??? do this in the first response all at once???
+})
 
 
 
