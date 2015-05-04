@@ -29,12 +29,12 @@ $(document).ready(function(){
 			url: form.attr('action'),
 			data: data,
 			success: function(data){
-				console.log('form success:', data);
+				console.log('form success:');
 				$('.results').html(data);
 				resetForm(form);
 			},
 			error: function(err) {
-				console.log('form error:', data);
+				console.log('form error:', err);
 				resetForm(form);
 			}
 		})

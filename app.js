@@ -89,7 +89,7 @@ Cloudant({account:cloudant_creds.username, password:cloudant_creds.password}, fu
   // console.log('starting school-analyzer:');
   // analyzer.run(); // DO NOT RUN ALL THE TIME
 
-
+  // TODO check the database to see if an initial analyzer run needs to be performed
 
 })
 
@@ -129,9 +129,13 @@ app.post('/student/submit', function(req, res){
         });
         return;
       }
+
+      // do some munging on the student top5 compared to schools
+      // var matchedTraits = persUtils.matches(studentProfile, school.doc.watsonPersonality);
+
       res.render('response-choice', {
         matches: matches,
-        studentPersonality: JSON.stringify(persUtils.flatten(studentPersonality.tree))
+        studentPersonality: JSON.stringify(persUtils.matches(studentPersonality), null, 4) //JSON.stringify(persUtils.flatten(studentPersonality.tree), null, 4)
       });
 
     })
@@ -141,84 +145,8 @@ app.post('/student/submit', function(req, res){
 
   })
 
-  // res.render('response-choice', {
-  //   sample: req.body.studentSample
-  // });
+
 });
-
-
-  // question_answer.ask({
-  //   text: "What is an adventure we can have in " + req.body.city,
-  //   dataset: 'travel'}, function(err, answers){
-  //     console.log(err, answers);
-  //     if (!err) {
-  //       console.log(answers[0].question.answers); // array of objects pipeline == 'Descriptive' are actual sentences
-
-  //       // // each answer text could go into 
-  //       // relationship_extraction.extract({dataset: 'ie-en-news', text: answers[0].question.answers[0].text}, function(err, data){
-  //       //   console.log('answer relationships:', data);
-  //       // });
-
-
-  //       // <entity eid="-E6" type="GPE"
-
-  //       // starts you out somewhere and you have to figure out how to go somewhere else? or you have to figure out where it is?
-
-  //       // actions in a city -- "how can I " + action + " in " + city -- 
-
-  //       // you are in city,  you know these things (q&a results) what do you want to do?
-
-  //       // get some money
-
-  //       // you come to an ATM machine
-
-  //       // find the airport
-
-
-
-  //       res.render('adventure-choice', {
-  //         answers: answers[0].question.answers,
-  //         currentCity: req.body.city
-  //       });
-  //     }
-  //   });
-
-  // res.render('adventure', req.body);
-
-
-// app.post('/concept/create', function(req, res) {
-//   var payload = {
-//     'seeds': req.body.seeds.trim().split('\r\n'),
-//     'dataset': req.body.dataset,
-//     'label': req.body.label,
-//   };
-
-//   concept_expansion.createJob(payload, function(err, result) {
-//     if (err)
-//       return res.json({ error: 'Error creating the job'});
-//     else
-//       return res.json(result);
-//   });
-// });
-
-// app.get('/concept/status', function(req, res) {
-//   concept_expansion.getStatus({ jobid: req.query.jobid }, function(err, result) {
-//     if (err)
-//       return res.json({ error: 'Error getting the job status' });
-//     else
-//       return res.json({ status: result.state || 'F' });
-//   });
-// });
-
-// app.post('/concept/result', function(req, res) {
-//   concept_expansion.getResult({ jobid: req.body.jobid }, function(err, result) {
-//     if (err)
-//       return res.json({ error: 'Error getting the job result' });
-//     else
-//       return res.json(result);
-//   });
-// });
-
 
 
 
