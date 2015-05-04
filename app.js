@@ -114,7 +114,7 @@ app.post('/student/submit', function(req, res){
   app.persInsights.profile({text: req.body.studentSample}, function(err, studentPersonality){
     console.log('got a student profile:', err, studentPersonality);
     if (err) {
-      res.render('index', {
+      res.render('error', {
         error: 'got an error, try a longer input'
       });
       return;
@@ -122,9 +122,9 @@ app.post('/student/submit', function(req, res){
     console.log('finding matches...');
     // TODO matching algorithm here against all schools
     finder.findSchools(studentPersonality, function(err, matches){
-      console.log('potential school matches:', matches);
+      // console.log('potential school matches:', matches);
       if (err) {
-        res.render('index', {
+        res.render('error', {
           error: err.error
         });
         return;
