@@ -16,10 +16,19 @@
 	}
 
 	function formatResults(list, data) {
-		$.each(data.matches, function(index, value) {
+		$.each(data.matches, function(i, school) {
 			var li = $('<li/>')
-			        .text(value.school_name)
-			        .appendTo(list);
+					.text(school.school_name)
+					.appendTo(list);
+			var traitsText = [];
+			$.each(school.traits, function(j, trait) {
+				if (trait.percentage > 0.75) {
+					traitsText.push(trait.name);
+				}
+			});
+			var info = $('<p/>')
+						.text("Personality: "+traitsText.join(', '))
+						.appendTo(li);
 		});
 	}
 
