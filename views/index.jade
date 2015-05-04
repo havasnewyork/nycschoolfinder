@@ -3,14 +3,14 @@ extends ./layout.jade
 
 block row-content
   div.col-lg-6.col-md-6.col-xs-12
-    h2 Enter a Starting City for your Adventure
+    h2 Enter a sample of your student's writing to help match their personality to an NYC High School
     div.well
       form.jobForm.form-horizontal(method='post', action="/step")
         fieldset
           div.form-group.row
-            label.col-lg-2.col-xs-2(for='labelfield') Label:
+            label.col-lg-2.col-xs-2(for='labelfield') Sample:
             div.col-lg-9.col-xs-10
-              input.form-control(type='text', name='city', value='Brooklyn', required='true')
+              textarea.form-control(type='text', name='studentSample', value='', required='true')
           div.form-group.row
             div.col-lg-4.col-lg-push-1.col-xs-4
               input.btn.btn-block(type='submit', value='Submit')

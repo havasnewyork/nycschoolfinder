@@ -50,67 +50,79 @@ var qa_creds = bluemix.getServiceCreds('question_and_answer', services);
 // console.log(qa_creds);
 qa_creds.version = 'v1';
 
+
+
+var pers_creds = bluemix.getServiceCreds('personality_insights', services);
+// console.log(qa_creds);
+pers_creds.version = 'v2';
+
+
+
+
 var relationship_extraction = watson.relationship_extraction(re_creds);
 var question_answer = watson.question_and_answer(qa_creds);
+app.persInsights = watson.personality_insights(pers_creds);
 
-var qa_datasets;
+var analyzer = require('./lib/school-analyzer')(app);
 
-question_answer.datasets({}, function(err, data){
-  console.log('our qa datasets:', data);
-})
+
+// var qa_datasets;
+
+// question_answer.datasets({}, function(err, data){
+//   console.log('our qa datasets:', data);
+// })
 
 
 app.get('/', function(req, res) {
-  res.render('adventure', req.query);
+  res.render('index', req.query);
 });
 
 
-// app.post('/health', function(req, res){
 
-// });
-
-app.post('/step', function(req, res){
+app.post('/search', function(req, res){
   console.log('post form:', req.body);
   
-
-  question_answer.ask({
-    text: "What is an adventure we can have in " + req.body.city,
-    dataset: 'travel'}, function(err, answers){
-      console.log(err, answers);
-      if (!err) {
-        console.log(answers[0].question.answers); // array of objects pipeline == 'Descriptive' are actual sentences
-
-        // each answer text could go into 
-        relationship_extraction.extract({dataset: 'ie-en-news', text: answers[0].question.answers[0].text}, function(err, data){
-          console.log('answer relationships:', data);
-        });
+  res.render('response-choice', {});
+});
 
 
-        // <entity eid="-E6" type="GPE"
+  // question_answer.ask({
+  //   text: "What is an adventure we can have in " + req.body.city,
+  //   dataset: 'travel'}, function(err, answers){
+  //     console.log(err, answers);
+  //     if (!err) {
+  //       console.log(answers[0].question.answers); // array of objects pipeline == 'Descriptive' are actual sentences
 
-        // starts you out somewhere and you have to figure out how to go somewhere else? or you have to figure out where it is?
-
-        // actions in a city -- "how can I " + action + " in " + city -- 
-
-        // you are in city,  you know these things (q&a results) what do you want to do?
-
-        // get some money
-
-        // you come to an ATM machine
-
-        // find the airport
+  //       // // each answer text could go into 
+  //       // relationship_extraction.extract({dataset: 'ie-en-news', text: answers[0].question.answers[0].text}, function(err, data){
+  //       //   console.log('answer relationships:', data);
+  //       // });
 
 
+  //       // <entity eid="-E6" type="GPE"
 
-        res.render('adventure-choice', {
-          answers: answers[0].question.answers,
-          currentCity: req.body.city
-        });
-      }
-    });
+  //       // starts you out somewhere and you have to figure out how to go somewhere else? or you have to figure out where it is?
+
+  //       // actions in a city -- "how can I " + action + " in " + city -- 
+
+  //       // you are in city,  you know these things (q&a results) what do you want to do?
+
+  //       // get some money
+
+  //       // you come to an ATM machine
+
+  //       // find the airport
+
+
+
+  //       res.render('adventure-choice', {
+  //         answers: answers[0].question.answers,
+  //         currentCity: req.body.city
+  //       });
+  //     }
+  //   });
 
   // res.render('adventure', req.body);
-});
 
 
 // app.post('/concept/create', function(req, res) {

@@ -1,4 +1,24 @@
 {
+  "cloudantNoSQLDB": [
+   {
+    "credentials": {
+     "host": "79c2f50d-46fe-4927-a601-837758691294-bluemix.cloudant.com",
+     "password": "58150ddc8c22a77fd68b01cbb1572e2f7eaf2a05794d59f44a2ee29343a9e97f",
+     "port": 443,
+     "url": "https://79c2f50d-46fe-4927-a601-837758691294-bluemix:58150ddc8c22a77fd68b01cbb1572e2f7eaf2a05794d59f44a2ee29343a9e97f@79c2f50d-46fe-4927-a601-837758691294-bluemix.cloudant.com",
+     "username": "79c2f50d-46fe-4927-a601-837758691294-bluemix"
+    },
+    "label": "cloudantNoSQLDB",
+    "name": "Cloudant Hackathon",
+    "plan": "Shared",
+    "tags": [
+     "data_management",
+     "ibm_created",
+     "mobile",
+     "ibm_dedicated_public"
+    ]
+   }
+  ],
   "concept_expansion": [
    {
     "credentials": {
@@ -34,6 +54,23 @@
      "watson",
      "ibm_created",
      "ibm_beta",
+     "ibm_dedicated_public"
+    ]
+   }
+  ],
+  "personality_insights": [
+   {
+    "credentials": {
+     "password": "xaKER35Jwjwh",
+     "url": "https://gateway.watsonplatform.net/personality-insights/api",
+     "username": "6027b4f8-3170-4eaf-83c6-f43efbe14e6a"
+    },
+    "label": "personality_insights",
+    "name": "Personality Insights-7m",
+    "plan": "IBM Watson Personality Insights Monthly Plan",
+    "tags": [
+     "watson",
+     "ibm_created",
      "ibm_dedicated_public"
     ]
    }
@@ -77,9 +114,9 @@
     "name": "Relationship Extraction-ye",
     "plan": "relationship_extraction_free_plan",
     "tags": [
+     "ibm_beta",
      "watson",
      "ibm_created",
-     "ibm_experimental",
      "ibm_dedicated_public"
     ]
    }

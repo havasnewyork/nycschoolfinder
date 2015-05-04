@@ -7,7 +7,7 @@ declared-services:
 applications:
 - services:
   - concept-expansion-service
-  name: a-simple-text-game
+  name: nycschoolfinder
   command: node app.js
   path: .
   memory: 256M
