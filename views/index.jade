@@ -2,10 +2,10 @@
 extends ./layout.jade
 
 block row-content
-  h1 School Finder
-  h3.tagline There are #{schoolCount} High Schools in New York City. Find the right one for your children.
+  h1 NYC School Finder
+  h3.tagline There are #{schoolCount} High Schools in New York City. Find the right one for your child.
   div.action.box
-    h3 Analyse your personality with
+    h3 Analyse your childs personality with
     ul.actions
       li.facebook
         a(href='javascript:void(0);')
@@ -18,19 +18,19 @@ block row-content
       li.extra or
       li
         a#pasteCorpusLink(href='javascript:void(0);')
-          |paste in samples of your children's writing
+          |Write a short biography about your child, what are their interests, what are their ambitions in life. 
     div.well#pasteCorpus
       form.jobForm.form-horizontal(method='post', action="/student/submit")
         fieldset
           div.form-group.row
-            label.col-lg-2.col-xs-2(for='labelfield') Sample writing:
+            label.col-lg-2.col-xs-2(for='labelfield') About your child:
             div.col-lg-10.col-xs-10
               textarea.form-control(type='text', name='studentSample', value='', required='true')
           div.form-group.row
             div.col-lg-3.col-lg-push-9.col-xs-4
               input.btn.btn-block(type='submit', value='Analyse')
   div.info.box
-    h3 Here are some High Schools you might be interested in
+    h3 Here are some High Schools that match you childs personality
       ol.schools.results
         li School 1
   div.map-container
