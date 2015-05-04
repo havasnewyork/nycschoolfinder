@@ -1,0 +1,43 @@
+/* style.css
+ * This file provides css styles.
+ */
+.state_F {
+background-color: #A91024; /* IBM's RED 2 */
+color: white;
+}
+.state_D {
+background-color: #008A52; /* IBM's GREEN 1 */
+color: white;
+}
+.state_R {
+background-color: #003F69; /* IBM's BLUE3 */
+color: white;
+}
+.state_A {
+background-color: #B8461B; /* IBM's ORANGE */
+color: white;
+}
+.state_G {
+background-color: #FDB813; /* IBM's YELLOW */
+color: white;
+}
+
+.errorMsg {
+	font-weight: bold;
+	color: red;
+}
+
+.resultTable {
+	text-align: left;
+}
+.resultTable th {
+	padding: 0px 5px 0px 5px;
+}
+
+.concept td:hover {
+	background-color: #ccc;
+	cursor: pointer;
+}
+.resultTable td:first-child {
+	text-align: center;
+}
