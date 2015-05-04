@@ -42,10 +42,16 @@ color: white;
 	text-align: center;
 }
 
+@mixin textShadow {
+	text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9);
+}
+
 h1 {
 	text-align: center;
 	font-weight: 900;
 	font-size: 3em;
+	color: #fff;
+	@include textShadow;
 }
 
 .tagline {
@@ -53,15 +59,21 @@ h1 {
 	font-weight: 100;
 	font-size: 2em;
 	margin-bottom: 3em;
+	color: #fff;
+	@include textShadow;
 }
 
 div.box {
 	border: 3px solid rgba(128, 128, 128, 0.1);
 	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.9);
 	h3 {
 		font-size: 1.5em;
 		text-align: center;
 		margin: 0.5em 0;
+	}
+	+ .box {
+		margin-top: 1em;
 	}
 }
 
@@ -94,4 +106,31 @@ ul.actions {
 	textarea {
 		height: 10em;
 	}
+}
+
+.map-container {
+	z-index: -1;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background:  linear-gradient(to bottom, rgba(0, 0, 0, 1) 13%, transparent 25%);
+	}
+}
+
+#map-canvas {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0.75;
 }

@@ -46,21 +46,28 @@
 h1 {
   text-align: center;
   font-weight: 900;
-  font-size: 3em; }
+  font-size: 3em;
+  color: #fff;
+  text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
 
 .tagline {
   text-align: center;
   font-weight: 100;
   font-size: 2em;
-  margin-bottom: 3em; }
+  margin-bottom: 3em;
+  color: #fff;
+  text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
 
 div.box {
   border: 3px solid rgba(128, 128, 128, 0.1);
-  border-radius: 10px; }
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9); }
   div.box h3 {
     font-size: 1.5em;
     text-align: center;
     margin: 0.5em 0; }
+  div.box + .box {
+    margin-top: 1em; }
 
 ul.actions {
   list-style: none;
@@ -85,5 +92,29 @@ ul.actions {
   border: none; }
   #pasteCorpus textarea {
     height: 10em; }
+
+.map-container {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+  .map-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, black 13%, transparent 25%); }
+
+#map-canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.75; }
 
 /*# sourceMappingURL=style.css.map */
