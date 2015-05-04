@@ -103,7 +103,18 @@ Cloudant({account:cloudant_creds.username, password:cloudant_creds.password}, fu
 
 
 app.get('/', function(req, res) {
-  res.render('index', req.query);
+
+  // get a count of our db records
+
+  app.schooldb.list(function(err, docs){
+    console.log('index school list:', docs.rows.length);
+
+    res.render('index', {
+      schoolCount: docs.rows.length
+    });
+  });
+
+  
 });
 
 
