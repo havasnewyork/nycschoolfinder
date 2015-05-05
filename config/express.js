@@ -30,6 +30,7 @@ module.exports = function (app) {
 
   // Setup static public directory
   app.use(express.static(__dirname + '/../public'));
+  app.use('/samples', express.static(__dirname + '/../samples'));
   app.set('view engine', 'jade');
   app.set('views', __dirname + '/../views');
 
