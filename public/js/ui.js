@@ -17,6 +17,8 @@
 	}
 
 	function formatResults(data) {
+
+		console.log('RESULTS are they cached? ', data.sampleId, data.isCached);
 		var schoolsList = $('#results .schools');
 		var personalitiesList = $('#results .personalities');
 		var careersList = $('#moreInfo .careers');
@@ -117,7 +119,9 @@
 
 	var onResultReady = function() {
 		console.log('onResultReady');
+		$('#taWidgetContainer').show();
 		taClient.resize();
+
 	  // $('.ta-result').show();
 	  // $( '.ta-loading').hide();
 	  // $.modal.resize();
@@ -153,13 +157,14 @@
 		    taClient.start(function(){
 		    	$.get(tradeoffData, function(data){
 		    		taClient.show(data.problem, onResultReady, onResultSelection);
+
 		    	});	
 		    });
 		    
 	}
 
 	function initTradeoff(tradeoffData) {
-
+		$('#taWidgetContainer').hide();
 		if (taClient) {
 			taClient.destroy(function(){
 				console.log('taClient.destroy(callback) done');
