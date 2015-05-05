@@ -2,10 +2,12 @@
 extends ./layout.jade
 
 block row-content
-  h1 NYC School Finder
+  h1
+      span NYC
+      |  School Finder
   h3.tagline There are #{schoolCount} High Schools in New York City. Find the right one for your child.
   div.panel.panel-default.action.box#personalityEntry
-    h3(data-toggle="collapse") Analyse your child's personality
+    h3(data-toggle="collapse") Getting to know your child
     //- ul.actions
     //-   li.facebook
     //-     a(href='javascript:void(0);')
@@ -23,7 +25,7 @@ block row-content
       form.jobForm.form-horizontal(method='post', action="/student/submit")
         fieldset
           div.form-group.row
-            label.col-lg-3.col-xs-3(for='labelfield') Paste in samples of your child's writing:
+            label.col-lg-3.col-xs-3(for='labelfield') Get your child to tell us a little bit about themselves. What are their interests, hobbies and what do you they want do after they finish school. 
             div.col-lg-9.col-xs-9
               textarea.form-control(type='text', name='studentSample', value='', required='true')
           div.form-group.row
