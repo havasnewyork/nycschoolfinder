@@ -50,6 +50,9 @@ h1 {
   color: #fff;
   text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
 
+h3 {
+  color: #05a4db; }
+
 h3.toggle {
   cursor: pointer; }
 
