@@ -9,7 +9,7 @@
 	}
 
 	function showResults() {
-		$('#personalityEntry .collapse').collapse();
+		$('#pasteCorpus').collapse();
 		$('#results').css('display', 'block').css('opacity', '1');
 		$('#moreInfo').css('display', 'block').css('opacity', '1');
 

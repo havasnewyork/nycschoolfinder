@@ -7,7 +7,7 @@ block row-content
       |  School Finder
   h3.tagline We&rsquo;ve analyzed #{schoolCount} High Schools in New York City. Find the right one for your child.
   div.panel.panel-default.action.box#personalityEntry
-    h3(data-toggle="collapse") Let&rsquo;s get to know your child&rsquo;s personality
+    h3.toggle(data-toggle="collapse", href="#pasteCorpus", aria-expanded="false", aria-controls="school") Let&rsquo;s get to know your child&rsquo;s personality
     //- ul.actions
     //-   li.facebook
     //-     a(href='javascript:void(0);')
@@ -21,7 +21,7 @@ block row-content
     //-   li
     //-     a#pasteCorpusLink(href='javascript:void(0);')
     //-       |Write a short biography about your child, what are their interests, what are their ambitions in life. 
-    div.in.well#pasteCorpus
+    div.panel-collapse.collapse.in.well#pasteCorpus
       form.jobForm.form-horizontal(method='post', action="/student/submit")
         fieldset
           div.form-group.row

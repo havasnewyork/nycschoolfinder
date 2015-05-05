@@ -129,11 +129,10 @@ ul.actions {
   font-size: 1.25em;
   position: absolute;
   left: 0;
-  display: none;
+  display: inline-block;
   opacity: 0;
   transition: opacity 0.2s; }
   .schoolTrait.selected {
-    display: inline-block;
     opacity: 1; }
 
 .personalityScale {
@@ -180,10 +179,11 @@ ul.actions {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
   transition: opacity 0.5s;
-  animation: pulse 2s ease-in-out infinite alternate; }
+  animation: pulse 2s ease-in-out infinite alternate;
+  -webkit-animation: pulse 2s ease-in-out infinite alternate; }
   #loader .msg {
     color: rgba(255, 255, 255, 0.5);
     margin-top: calc(23% - 0.5em);
@@ -197,6 +197,13 @@ ul.actions {
     display: block;
     opacity: 1; }
 @keyframes pulse {
+  0% {
+    background: rgba(255, 255, 255, 0.9); }
+  50% {
+    background: rgba(255, 255, 255, 0.5); }
+  100% {
+    background: rgba(255, 255, 255, 0.9); } }
+@-webkit-keyframes pulse {
   0% {
     background: rgba(255, 255, 255, 0.9); }
   50% {
