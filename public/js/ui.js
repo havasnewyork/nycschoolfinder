@@ -22,12 +22,12 @@
 		var schoolsList = $('#results .schools');
 		var personalitiesList = $('#moreInfo .personalities');
 
-		$.each(data.matches, function(i, school) {
+		$.each(data.matches.sort(function(a,b) {return b.score - a.score}), function(i, school) {
 			var li = $('<li/>')
 					.text(school.school_name)
 					.appendTo(schoolsList);
 			var traitsText = [];
-			$.each(school.traits, function(j, trait) {
+			$.each(school.traits.sort(function(a,b) {return b.percentage - a.percentage}), function(j, trait) {
 				if (trait.percentage > 0.75) {
 					traitsText.push(trait.name/* + " (" + (trait.percentage*100).toFixed(2) + "%)"*/);
 				}
@@ -37,7 +37,7 @@
 						.appendTo(li);
 		});
 
-		$.each(data.studentPersonality, function(i, personality) {
+		$.each(data.studentPersonality.sort(function(a,b) {return b.percentage - a.percentage}), function(i, personality) {
 			var li = $('<li/>')
 					.text(personality.name + " (" + (personality.percentage*100).toFixed(2) + "%)")
 					.appendTo(personalitiesList);
