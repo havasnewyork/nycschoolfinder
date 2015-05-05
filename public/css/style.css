@@ -50,6 +50,9 @@ h1 {
   color: #fff;
   text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
 
+h3 {
+  color: #1da6d5; }
+
 h3.toggle {
   cursor: pointer; }
 
@@ -73,7 +76,7 @@ div.box {
   div.box h3 {
     font-size: 1.5em;
     text-align: center;
-    margin: 0.5em 0; }
+    margin: 0.7em 0 0; }
 
 ul.actions {
   list-style: none;
