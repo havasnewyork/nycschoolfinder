@@ -74,7 +74,7 @@ div.box {
   div.box h3 {
     font-size: 1.5em;
     text-align: center;
-    margin: 0.5em 0; }
+    margin: 1em 0 0.5em; }
 
 ul.actions {
   list-style: none;
@@ -99,12 +99,39 @@ ul.actions {
   #pasteCorpus textarea {
     height: 10em; }
 
-#results, #moreInfo {
+#results, #moreInfo, #tradeOff {
   display: none;
   opacity: 0; }
 
-.schools {
-  margin-bottom: 1em; }
+#taWidgetContainer {
+  margin-top: 1.5em; }
+
+#schools, #careers {
+  padding: 1em 2em; }
+  #schools span, #careers span {
+    font-size: 12px;
+    padding-left: 1.4em; }
+
+.two-col-list, .schools, .careers {
+  margin: 0.3em 0 1em;
+  -moz-column-count: 2;
+  -moz-column-gap: 1.5em;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 1.5em;
+  column-count: 2;
+  column-gap: 1.5em;
+  padding: 0;
+  font-size: 14px; }
+
+.schools li {
+  margin-left: 2.5em;
+  cursor: pointer;
+  font-size: 14px; }
+  .schools li:hover {
+    color: #00b2ef; }
+
+.careers li {
+  margin-left: 2.5em; }
 
 .personalities {
   text-align: center;
@@ -225,7 +252,7 @@ ul.actions {
     bottom: 0;
     left: 0;
     z-index: 1;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 12%, transparent 30%); }
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 12%, transparent 30%); }
 
 #map-canvas {
   position: absolute;
