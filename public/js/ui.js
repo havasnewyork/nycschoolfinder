@@ -37,10 +37,20 @@
 						.appendTo(li);
 		});
 
-		$.each(data.studentPersonality.sort(function(a,b) {return b.percentage - a.percentage}), function(i, personality) {
+		$.each(data.studentPersonality, function(i, personality) {
 			var li = $('<li/>')
-					.text(personality.name + " (" + (personality.percentage*100).toFixed(2) + "%)")
 					.appendTo(personalitiesList);
+			var sliderWidth = 5; // percents
+			var sliderStart = personality.percentage*100-sliderWidth/2;
+			var sliderEnd = personality.percentage*100+sliderWidth/2;
+			var sliderColour = "rgba(30, 100, 220, 0.5)";
+			console.log(sliderStart);
+			var item = $('<span/>')
+					.text(personality.name/* + " (" + (personality.percentage*100).toFixed(2) + "%)"*/)
+					.addClass('personalityScale')
+					.addClass(personality.name)
+					.css('background', 'linear-gradient(to right, transparent '+sliderStart+'%, '+sliderColour+' '+sliderStart+'%, '+sliderColour+' '+sliderEnd+'%, transparent '+sliderEnd+'%)')
+					.appendTo(li);
 		});
 	}
 

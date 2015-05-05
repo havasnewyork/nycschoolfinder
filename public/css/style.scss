@@ -68,13 +68,13 @@ div.box {
 	border-radius: 10px;
 	background-color: rgba(255, 255, 255, 0.9);
 	transition: opacity 0.2s;
+	margin-bottom: 1em;
 	h3 {
 		font-size: 1.5em;
 		text-align: center;
 		margin: 0.5em 0;
 	}
 	+ .box {
-		margin-top: 1em;
 	}
 }
 
@@ -105,6 +105,73 @@ ul.actions {
 	border: none;
 	textarea {
 		height: 10em;
+	}
+}
+
+.personalities {
+	text-align: center;
+	list-style: none;
+	padding: 0;
+	margin-top: 2em;
+	li {
+		display: inline-block;
+		text-align: center;
+		position: relative;
+		width: 80%;
+		border-radius: 2em;
+		border: 2px solid rgba(30, 100, 220, 0.5);
+		margin: 0.5em 0;
+		color: rgba(0, 0, 0, 0.25);
+	}
+}
+
+.personalityScale {
+	display: inline-block;
+	width: 100%;
+	border-radius: 2em;
+	padding: 0.5em 0;
+	font-size: 1.25em;
+	&::before, &::after {
+		position: absolute;
+		font-size: 0.75em;
+		line-height: 1.8em;
+		color: rgba(0, 0, 0, 0.75);
+	}
+	&::before {
+		left: 2em;
+	}
+	&::after {
+		right: 2em;
+	}
+	&.Openness::before {
+		content: 'Down-to-earth';
+	}
+	&.Openness::after {
+		content: 'Imaginative';
+	}
+	&.Conscientiousness::before {
+		content: 'Easy Going';
+	}
+	&.Conscientiousness::after {
+		content: 'Organized';
+	}
+	&.Emotional::before {
+		content: 'Confident';
+	}
+	&.Emotional::after {
+		content: 'Sensitive';
+	}
+	&.Extraversion::before {
+		content: 'Reserved';
+	}
+	&.Extraversion::after {
+		content: 'Outgoing';
+	}
+	&.Agreeableness::before {
+		content: 'Contrary';
+	}
+	&.Agreeableness::after {
+		content: 'Accommodating';
 	}
 }
 
