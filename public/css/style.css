@@ -50,6 +50,9 @@ h1 {
   color: #fff;
   text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
 
+h3.toggle {
+  cursor: pointer; }
+
 .tagline {
   text-align: center;
   font-weight: 100;
@@ -57,6 +60,9 @@ h1 {
   margin-bottom: 3em;
   color: #fff;
   text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
+
+#charts {
+  margin-bottom: 20px; }
 
 div.box {
   border: 3px solid rgba(0, 0, 0, 0.1);

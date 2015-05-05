@@ -21,6 +21,7 @@
 	function formatResults(data) {
 		var schoolsList = $('#results .schools');
 		var personalitiesList = $('#moreInfo .personalities');
+		var personalitiesData = [];
 
 		$.each(data.matches.sort(function(a,b) {return b.score - a.score}), function(i, school) {
 			var li = $('<li/>')
@@ -66,8 +67,20 @@
 					mbti += personality.percentage > 0.5 ? 'J' : 'P';
 					break;
 			}
+			personalitiesData.push([personality.name, personality.percentage*100]);
+
 		});
 
+		console.log(personalitiesData);
+
+		var chart = c3.generate({
+			bindto: '#charts',
+			data: {
+				columns: personalitiesData,
+				type : 'pie'
+			}
+		});
+		
 		if (data.tradeoff) initTradeoff(data.tradeoff);
 
 	}
