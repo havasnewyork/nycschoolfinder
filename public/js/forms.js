@@ -5,6 +5,7 @@
 function resetForm(form) {
 	form.css('opacity', 1);
 	form.attr('disabled', false);
+
 }
 
 $(document).ready(function(){
@@ -23,7 +24,7 @@ $(document).ready(function(){
 
 		var results = $('.results').html("Performing detailed complicated analysis...").addClass('loading');
 		$("body").addClass("loading");
-
+		$("#form-error").html("");
 		// console.log(data);
 		$.ajax({
 			method: form.attr('method'),
@@ -39,6 +40,9 @@ $(document).ready(function(){
 			error: function(err) {
 				console.log('form error:', err);
 				resetForm(form);
+				$("#form-error").html(err.responseText);
+				// $('#results').trigger('resultsError');
+				$("body").removeClass("loading");
 			}
 		})
 	})
