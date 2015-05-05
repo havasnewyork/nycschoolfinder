@@ -219,10 +219,11 @@ ul.actions {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(255, 255, 255, 0.5);
 	text-align: center;
 	transition: opacity 0.5s;
 	animation: pulse 2s ease-in-out infinite alternate;
+	-webkit-animation: pulse 2s ease-in-out infinite alternate;
 	.msg {
 		color: rgba(255, 255, 255, 0.5);
 		margin-top: calc(23% - 0.5em);
@@ -240,6 +241,17 @@ ul.actions {
 		opacity: 1;
 	}
 	@keyframes pulse {
+		0% {
+			background: rgba(255, 255, 255, 0.9);
+		}
+		50% {
+			background: rgba(255, 255, 255, 0.5);
+		}
+		100% {
+			background: rgba(255, 255, 255, 0.9);
+		}
+	}
+	@-webkit-keyframes pulse {
 		0% {
 			background: rgba(255, 255, 255, 0.9);
 		}
