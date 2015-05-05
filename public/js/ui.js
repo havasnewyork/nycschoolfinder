@@ -11,26 +11,28 @@
 	function showResults() {
 		$('#personalityEntry .collapse').collapse();
 		$('#results').css('display', 'block').css('opacity', '1');
-		$('#moreInfo').css('display', 'block').css('opacity', '1');
 
 		formatResults($('#results').data("schools"));
 	}
 
 	function formatResults(data) {
 		var schoolsList = $('#results .schools');
-		var personalitiesList = $('#moreInfo .personalities');
+		var personalitiesList = $('#results .personalities');
 		var careersList = $('#moreInfo .careers');
 		var personalitiesData = [];
 
 		$.each(data.matches.sort(function(a,b) {return b.score - a.score}), function(i, school) {
 			var li = $('<li/>')
 					.text(school.school_name)
-					.appendTo(schoolsList);
+					.appendTo(schoolsList)
+					.hover(function() {
+						$('.school'+i).addClass('selected');
+					}, function() {
+						$('.school'+i).removeClass('selected');
+					});
 			var traitsText = [];
-			$.each(school.traits.sort(function(a,b) {return b.percentage - a.percentage}), function(j, trait) {
-				if (trait.percentage > 0.75) {
-					traitsText.push(trait.name/* + " (" + (trait.percentage*100).toFixed(2) + "%)"*/);
-				}
+			$.each(school.traits, function(j, trait) {
+				traitsText.push(trait.name/* + " (" + (trait.percentage*100).toFixed(2) + "%)"*/);
 			});
 			/*var info = $('<p/>')
 						.text("Personality: "+traitsText.join(', '))
@@ -51,6 +53,22 @@
 					.addClass(personality.name)
 					.css('background', 'linear-gradient(to right, transparent '+sliderStart+'%, '+sliderColour+' '+sliderStart+'%, '+sliderColour+' '+sliderEnd+'%, transparent '+sliderEnd+'%)')
 					.appendTo(li);
+
+			$.each(data.matches, function(i, school) {
+				$.each(school.traits, function(j, trait) {
+					if (trait.name === personality.name) {
+						var sliderStart = Math.max(0, trait.percentage*100-sliderWidth/2);
+						var sliderEnd = Math.min(100, trait.percentage*100+sliderWidth/2);
+						var sliderColour = "rgba(255, 10, 10, 0.5)";
+						var item = $('<span/>')
+								.addClass('schoolTrait')
+								.addClass('school'+i)
+								.html('&nbsp;')
+								.css('background', 'linear-gradient(to right, transparent '+sliderStart+'%, '+sliderColour+' '+sliderStart+'%, '+sliderColour+' '+sliderEnd+'%, transparent '+sliderEnd+'%)')
+								.appendTo(li);
+					}
+				});
+			});
 
 			switch (personality.name) {
 				case "Extraversion":
@@ -183,7 +201,8 @@
 		var mapOptions = {
 			center: new google.maps.LatLng(40.7401, -73.8694),
 			zoom: 11,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+		    disableDefaultUI: true
 		}
 		var map = new google.maps.Map(mapCanvas, mapOptions)
 

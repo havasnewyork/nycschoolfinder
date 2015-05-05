@@ -72,7 +72,8 @@ div.box {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.9);
   transition: opacity 0.2s;
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+  padding: 0 1em; }
   div.box h3 {
     font-size: 1.5em;
     text-align: center;
@@ -101,7 +102,7 @@ ul.actions {
   #pasteCorpus textarea {
     height: 10em; }
 
-#results, #moreInfo {
+#results {
   display: none;
   opacity: 0; }
 
@@ -123,6 +124,20 @@ ul.actions {
     border: 2px solid rgba(10, 190, 239, 0.5);
     margin: 0.5em 0;
     color: rgba(0, 0, 0, 0.25); }
+
+.schoolTrait {
+  width: 100%;
+  border-radius: 2em;
+  padding: 0.5em 0;
+  font-size: 1.25em;
+  position: absolute;
+  left: 0;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s; }
+  .schoolTrait.selected {
+    display: inline-block;
+    opacity: 1; }
 
 .personalityScale {
   display: inline-block;

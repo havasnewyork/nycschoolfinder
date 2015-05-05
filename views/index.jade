@@ -55,11 +55,11 @@ block row-content
     //-       .col-md-12
     //-         div(role='alert').alert
     //-         p #{info}
-  div.info.box#moreInfo
+  div.info.box#results
     h3.toggle(data-toggle="collapse", href="#personalities", aria-expanded="false", aria-controls="school") Our analysis of your child's personality
     div.panel-collapse.collapse.in#personalities
       ul.personalities
-      div#charts
+      //- div#charts
       //- div.foo
       //-   a.btn.btn-primary(data-toggle="collapse", href="#collapseExample", aria-expanded="false", aria-controls="collapseExample")
       //-     |Link with href
@@ -67,13 +67,13 @@ block row-content
       //-     |Button with data-target
       //-   div.collapse#collapseExample
       //-     |foo
-      h4 Suggested potential careers:
+      div#schools
+        ol.schools
+        div#taWidgetContainer
+  div.info.box#moreInfo
+    h3.toggle(data-toggle="collapse", href="#careers", aria-expanded="false", aria-controls="school") Suggested potential careers
+    div.panel-collapse.collapse.in#careers
       ul.careers
-  div.info.box#results
-    h3.toggle(data-toggle="collapse", href="#schools", aria-expanded="false", aria-controls="school") Here are some high schools that match you child's personality
-    div.panel-collapse.collapse.in#schools
-      ol.schools
-      div#taWidgetContainer(style="height: 800px;")
   div#loader
     div.msg
       img(src='/images/watson.gif')
