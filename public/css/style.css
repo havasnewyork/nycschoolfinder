@@ -129,11 +129,10 @@ ul.actions {
   font-size: 1.25em;
   position: absolute;
   left: 0;
-  display: none;
+  display: inline-block;
   opacity: 0;
   transition: opacity 0.2s; }
   .schoolTrait.selected {
-    display: inline-block;
     opacity: 1; }
 
 .personalityScale {
