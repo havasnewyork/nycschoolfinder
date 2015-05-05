@@ -28,7 +28,7 @@ var services = process.env.VCAP_SERVICES ? JSON.parse(process.env.VCAP_SERVICES)
 
 
 // set config flags for db usage
-app.set('useTestDb', true); // the test db only has 99 records for development speed....
+app.set('useTestDb', false); // the test db only has 99 records for development speed....
 
 // // if bluemix credentials exists, then override local
 // var credentials = extend({
@@ -175,6 +175,7 @@ app.post('/student/submit', function(req, res){
         // res.render('response-choice', {
         res.json({
           matches: matches,
+          tradeoff: tradeoff,
           studentPersonality: persUtils.matches(studentPersonality) //JSON.stringify(persUtils.flatten(studentPersonality.tree), null, 4)
         });
 
