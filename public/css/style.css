@@ -50,9 +50,6 @@ h1 {
   color: #fff;
   text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
 
-h3 {
-  color: #1da6d5; }
-
 h3.toggle {
   cursor: pointer; }
 
@@ -77,7 +74,7 @@ div.box {
   div.box h3 {
     font-size: 1.5em;
     text-align: center;
-    margin: 0.7em 0 0; }
+    margin: 0.5em 0; }
 
 ul.actions {
   list-style: none;
@@ -102,7 +99,7 @@ ul.actions {
   #pasteCorpus textarea {
     height: 10em; }
 
-#results {
+#results, #moreInfo {
   display: none;
   opacity: 0; }
 
@@ -183,12 +180,12 @@ ul.actions {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
   transition: opacity 0.5s;
   animation: pulse 2s ease-in-out infinite alternate; }
   #loader .msg {
-    color: #999;
+    color: rgba(255, 255, 255, 0.5);
     margin-top: calc(23% - 0.5em);
     margin-left: -0.5em; }
     #loader .msg .throbber {
@@ -200,11 +197,11 @@ ul.actions {
     opacity: 1; }
 @keyframes pulse {
   0% {
-    background: rgba(0, 0, 0, 0.5); }
+    background: rgba(255, 255, 255, 0.9); }
   50% {
-    background: rgba(0, 0, 0, 0.4); }
+    background: rgba(255, 255, 255, 0.5); }
   100% {
-    background: rgba(0, 0, 0, 0.5); } }
+    background: rgba(255, 255, 255, 0.9); } }
 .map-container {
   z-index: -1;
   position: fixed;
