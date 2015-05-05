@@ -2,6 +2,7 @@
 
 	$('#pasteCorpusLink').click(showPasteCorpus);
 	$('#results').on('resultsReady', showResults);
+	// $('#results').on('resultsError', showResults);
 
 
 	function showPasteCorpus() {
@@ -17,7 +18,7 @@
 	}
 
 	function formatResults(data) {
-
+		if (!data) return;
 		console.log('RESULTS are they cached? ', data.sampleId, data.isCached);
 		var schoolsList = $('#results .schools');
 		var personalitiesList = $('#results .personalities');

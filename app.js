@@ -99,7 +99,7 @@ var cloudant_creds = bluemix.getServiceCreds('cloudantNoSQLDB', services);
  
 Cloudant({account:cloudant_creds.username, password:cloudant_creds.password}, function(er, cloudant) {
   if (er)
-    return console.log('Error connecting to Cloudant account %s: %s', me, er.message)
+    return console.log('Error connecting to Cloudant account %s: %s', er.message)
  
   console.log('Connected to cloudant', app.get('useTestDb'));
   var dbname = 'schools';
@@ -159,6 +159,7 @@ app.get('/', function(req, res) {
 app.post('/student/submit', function(req, res){
   console.log('post form:', req.body.studentSample.length);
 
+  // if (req.body.studentSample.length < 100)
 
   // FIRST CHECK OUR HASH if we pre-ran this sample
   var sampleHash = hash(req.body.studentSample);
@@ -173,8 +174,9 @@ app.post('/student/submit', function(req, res){
       app.persInsights.profile({text: req.body.studentSample}, function(err, studentPersonality){
         console.log('got a student profile:', err, studentPersonality);
         if (err) {
+          res.status(500);
           res.render('error', {
-            error: 'got an error, try a longer input'
+            error: 'Your input was too short. Please try more than 100 words.'
           });
           return;
         }
@@ -183,6 +185,7 @@ app.post('/student/submit', function(req, res){
         finder.findSchools(studentPersonality, function(err, matches){
           // console.log('potential school matches:', matches);
           if (err) {
+            res.status(500);
             res.render('error', { error: JSON.stringify(err.error) });
             return;
           }
@@ -193,6 +196,7 @@ app.post('/student/submit', function(req, res){
           finder.tradeoff(matches, function(err, finalMatchData){ // now returns an object with matches that had enough data to tradeoff analyze...
             // changed to return a cache to the tradeoff result run a separate cloudant db
             if (err) {
+              res.status(500);
               res.render('error', { error: JSON.stringify(err.error) });
               return;
             }
@@ -224,7 +228,17 @@ app.post('/student/submit', function(req, res){
       res.json(data);
     } else {
       console.log('no cached run and no data, fubar');
-      res.render('error', { error: "no cached analysis found, no data sent, cant analyze anything" });
+
+      if (err) {
+        res.status(500);
+        res.render('error', {
+          error: 'Your input was too short. Please try more than 100 words.'
+        });
+        return;
+      }
+
+      res.status(500);
+      res.render('error', { error: "no cached analysis found, no data sent, no error, cant analyze anything" });
     }
 
   });
