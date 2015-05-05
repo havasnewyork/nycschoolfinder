@@ -5,9 +5,9 @@ block row-content
   h1
       span NYC
       |  School Finder
-  h3.tagline There are #{schoolCount} High Schools in New York City. Find the right one for your child.
+  h3.tagline We've analyzed #{schoolCount} High Schools in New York City. Find the right one for your child.
   div.panel.panel-default.action.box#personalityEntry
-    h3(data-toggle="collapse") Getting to know your child
+    h3(data-toggle="collapse") Let's get to know your child's personality
     //- ul.actions
     //-   li.facebook
     //-     a(href='javascript:void(0);')
@@ -25,7 +25,7 @@ block row-content
       form.jobForm.form-horizontal(method='post', action="/student/submit")
         fieldset
           div.form-group.row
-            label.col-lg-3.col-xs-3(for='labelfield') Get your child to tell us a little bit about themselves. What are their interests, hobbies and what do you they want do after they finish school. 
+            label.col-lg-3.col-xs-3(for='labelfield') Submit a piece of writing from your child. Maybe their interests, hobbies and what do you they want do after they finish school. 
             div.col-lg-9.col-xs-9
               textarea.form-control(type='text', name='studentSample', value='', required='true')
           div.form-group.row
@@ -67,16 +67,16 @@ block row-content
       //-     |Button with data-target
       //-   div.collapse#collapseExample
       //-     |foo
-    h4 Suggested potential careers:
+      h4 Suggested potential careers:
       ul.careers
   div.info.box#results
     h3.toggle(data-toggle="collapse", href="#schools", aria-expanded="false", aria-controls="school") Here are some high schools that match you child's personality
     div.panel-collapse.collapse.in#schools
       ol.schools
-    div#taWidgetContainer(style="height: 800px;")
+      div#taWidgetContainer(style="height: 800px;")
   div#loader
     div.msg
-      i.fa.fa-cog.fa-spin.throbber
+      img(src='/images/watson.gif')
       p Analysing...
   div.map-container
     div#map-canvas

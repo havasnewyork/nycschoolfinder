@@ -1,8 +1,6 @@
 (function() {
 
 	$('#pasteCorpusLink').click(showPasteCorpus);
-	$('#results').css('display', 'none').css('opacity', '0');
-	$('#moreInfo').css('display', 'none').css('opacity', '0');
 	$('#results').on('resultsReady', showResults);
 
 
@@ -34,9 +32,9 @@
 					traitsText.push(trait.name/* + " (" + (trait.percentage*100).toFixed(2) + "%)"*/);
 				}
 			});
-			var info = $('<p/>')
+			/*var info = $('<p/>')
 						.text("Personality: "+traitsText.join(', '))
-						.appendTo(li);
+						.appendTo(li);*/
 		});
 
 		var mbti = "";
