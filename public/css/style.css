@@ -98,6 +98,10 @@ ul.actions {
   #pasteCorpus textarea {
     height: 10em; }
 
+#results, #moreInfo {
+  display: none;
+  opacity: 0; }
+
 .schools {
   margin-bottom: 1em; }
 
