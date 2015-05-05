@@ -166,8 +166,8 @@ app.post('/student/submit', function(req, res){
   app.tradeoffdb.get(sampleHash, function(err, data){
     console.log('checked for previous run:', typeof err);
     // err will be 404 for no previous run
-    // if (err && err.status_code === 404) {
-    if (true) { // temp avoid cache
+    if (err && err.status_code === 404) {
+    // if (true) { // temp avoid cache
       console.log('no previous run found, running analysis...');
       // if (req.body.studentSample;)
       app.persInsights.profile({text: req.body.studentSample}, function(err, studentPersonality){

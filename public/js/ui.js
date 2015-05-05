@@ -134,7 +134,7 @@
 	};
 
 
-	function initTradeoff(tradeoffData) {
+	function createTradeoff(tradeoffData) {
 		// console.log('tradeoff json:', window.location.protocol + "//" + window.location.hostname + tradeoffData);
 		taClient = new TradeoffAnalytics({
 		      dilemmaServiceUrl: tradeoffData,
@@ -151,6 +151,19 @@
 		    	});	
 		    });
 		    
+	}
+
+	function initTradeoff(tradeoffData) {
+
+		if (taClient) {
+			taClient.destroy(function(){
+				console.log('taClient.destroy(callback) done');
+				createTradeoff(tradeoffData);
+			});
+		} else {
+			createTradeoff(tradeoffData);
+		}
+		
 		    
 	}
 
