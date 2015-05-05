@@ -22,6 +22,10 @@
 		var careersList = $('#moreInfo .careers');
 		var personalitiesData = [];
 
+		schoolsList.empty();
+		personalitiesList.empty();
+		careersList.empty();
+
 		$.each(data.matches.sort(function(a,b) {return b.score - a.score}), function(i, school) {
 			var li = $('<li/>')
 					.text(school.school_name)
