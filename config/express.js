@@ -20,6 +20,10 @@
 var express    = require('express'),
   errorhandler = require('errorhandler'),
   bodyParser   = require('body-parser');
+var serveIndex = require('serve-index')
+
+
+  // directory     = require('express-directory');
 
 module.exports = function (app) {
 
@@ -30,7 +34,10 @@ module.exports = function (app) {
 
   // Setup static public directory
   app.use(express.static(__dirname + '/../public'));
+  app.use('/samples', serveIndex(__dirname + '/../samples'));
   app.use('/samples', express.static(__dirname + '/../samples'));
+  
+  // app.use('/samples', directory);
   app.set('view engine', 'jade');
   app.set('views', __dirname + '/../views');
 
