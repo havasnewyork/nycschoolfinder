@@ -7,7 +7,7 @@ block row-content
       |  School Finder
   h3.tagline We&rsquo;ve analyzed #{schoolCount} High Schools in New York City. Find the right one for your child.
   div.panel.panel-default.action.box#personalityEntry
-    h3.toggle(data-toggle="collapse", href="#pasteCorpus", aria-expanded="false", aria-controls="school") Let&rsquo;s get to know your child&rsquo;s personality
+    h3.toggle(data-toggle="collapse", href="#pasteCorpus", aria-expanded="false", aria-controls="school") Let&rsquo;s get to know your child&rsquo;s personality.
     //- ul.actions
     //-   li.facebook
     //-     a(href='javascript:void(0);')
@@ -58,7 +58,8 @@ block row-content
     //-         div(role='alert').alert
     //-         p #{info}
   div.info.box#results
-    h3.toggle(data-toggle="collapse", href="#personalities", aria-expanded="false", aria-controls="school") Here are the top high schools that match you child&rsquo;s personality
+    h3.toggle(data-toggle="collapse", href="#personalities", aria-expanded="false", aria-controls="school") Here are the results of your child's analysis, compared to top matching schools.
+    //- Here are the top high schools that match you child&rsquo;s personality
     div.panel-collapse.collapse.in#personalities
       ul.personalities
       //- div#charts
@@ -72,10 +73,10 @@ block row-content
       div#schools
         ol.schools
   div.info.box#tradeOff
-    h3.toggle(data-toggle="collapse", href="#taWidgetContainer", aria-expanded="false", aria-controls="taWidgetContainer") Interactive Fancy Pants Picker
+    h3.toggle(data-toggle="collapse", href="#taWidgetContainer", aria-expanded="false", aria-controls="taWidgetContainer") Refine your choices.
       div#taWidgetContainer(style="height: 800px;")
   div.info.box#moreInfo
-    h3.toggle(data-toggle="collapse", href="#careers", aria-expanded="false", aria-controls="school") Suggested potential careers
+    h3.toggle(data-toggle="collapse", href="#careers", aria-expanded="false", aria-controls="school") Suggested potential careers based on the personality analysis.
     div.panel-collapse.collapse.in#careers
       ul.careers
   div#loader
