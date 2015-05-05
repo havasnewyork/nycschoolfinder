@@ -37,20 +37,35 @@
 						.appendTo(li);
 		});
 
+		var mbti = "";
 		$.each(data.studentPersonality, function(i, personality) {
 			var li = $('<li/>')
 					.appendTo(personalitiesList);
 			var sliderWidth = 5; // percents
 			var sliderStart = personality.percentage*100-sliderWidth/2;
 			var sliderEnd = personality.percentage*100+sliderWidth/2;
-			var sliderColour = "rgba(30, 100, 220, 0.5)";
-			console.log(sliderStart);
+			var sliderColour = "rgba(10, 190, 239, 0.5)";
 			var item = $('<span/>')
 					.text(personality.name/* + " (" + (personality.percentage*100).toFixed(2) + "%)"*/)
 					.addClass('personalityScale')
 					.addClass(personality.name)
 					.css('background', 'linear-gradient(to right, transparent '+sliderStart+'%, '+sliderColour+' '+sliderStart+'%, '+sliderColour+' '+sliderEnd+'%, transparent '+sliderEnd+'%)')
 					.appendTo(li);
+
+			switch (personality.name) {
+				case "Extraversion":
+					mbti += personality.percentage > 0.5 ? 'E' : 'I';
+					break;
+				case "Openness":
+					mbti += personality.percentage > 0.5 ? 'N' : 'S';
+					break;
+				case "Agreeableness":
+					mbti += personality.percentage > 0.5 ? 'F' : 'T';
+					break;
+				case "Conscientiousness":
+					mbti += personality.percentage > 0.5 ? 'J' : 'P';
+					break;
+			}
 		});
 
 		if (data.tradeoff) initTradeoff(data.tradeoff);
