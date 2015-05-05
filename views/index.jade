@@ -75,6 +75,10 @@ block row-content
   div.info.box#tradeOff
     h3.toggle(data-toggle="collapse", href="#taWidgetContainer", aria-expanded="false", aria-controls="taWidgetContainer") Refine your choices.
       div#taWidgetContainer(style="height: 800px;")
+      div#taWidgetLoader(style="height: 400px;")
+        div.msg
+          img(src='/images/watson.gif')
+          p Creating Tradeoff Analysis...
   div.info.box#moreInfo
     h3.toggle(data-toggle="collapse", href="#careers", aria-expanded="false", aria-controls="school") Suggested potential careers based on the personality analysis.
     div.panel-collapse.collapse.in#careers

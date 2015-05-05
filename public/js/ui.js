@@ -110,6 +110,7 @@
 		console.log('onResultReady');
 		$('#taWidgetContainer').show();
 		taClient.resize();
+		$("#taWidgetLoader").hide();
 
 	  // $('.ta-result').show();
 	  // $( '.ta-loading').hide();
@@ -154,8 +155,10 @@
 
 	function initTradeoff(tradeoffData) {
 		$('#taWidgetContainer').hide();
+		$("#taWidgetLoader").show();
 		if (taClient) {
 			taClient.destroy(function(){
+
 				console.log('taClient.destroy(callback) done');
 				createTradeoff(tradeoffData);
 			});
