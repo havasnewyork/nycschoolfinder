@@ -22,12 +22,12 @@
 		var schoolsList = $('#results .schools');
 		var personalitiesList = $('#moreInfo .personalities');
 
-		$.each(data.matches, function(i, school) {
+		$.each(data.matches.sort(function(a,b) {return b.score - a.score}), function(i, school) {
 			var li = $('<li/>')
 					.text(school.school_name)
 					.appendTo(schoolsList);
 			var traitsText = [];
-			$.each(school.traits, function(j, trait) {
+			$.each(school.traits.sort(function(a,b) {return b.percentage - a.percentage}), function(j, trait) {
 				if (trait.percentage > 0.75) {
 					traitsText.push(trait.name/* + " (" + (trait.percentage*100).toFixed(2) + "%)"*/);
 				}
@@ -37,7 +37,7 @@
 						.appendTo(li);
 		});
 
-		$.each(data.studentPersonality, function(i, personality) {
+		$.each(data.studentPersonality.sort(function(a,b) {return b.percentage - a.percentage}), function(i, personality) {
 			var li = $('<li/>')
 					.text(personality.name + " (" + (personality.percentage*100).toFixed(2) + "%)")
 					.appendTo(personalitiesList);
@@ -52,6 +52,124 @@
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		}
 		var map = new google.maps.Map(mapCanvas, mapOptions)
+
+		var styles = [
+		    {
+		        "featureType": "administrative",
+		        "elementType": "labels.text.fill",
+		        "stylers": [
+		            {
+		                "color": "#444444"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "landscape",
+		        "elementType": "all",
+		        "stylers": [
+		            {
+		                "color": "#f2f2f2"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "poi",
+		        "elementType": "all",
+		        "stylers": [
+		            {
+		                "visibility": "off"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "poi.school",
+		        "elementType": "geometry.fill",
+		        "stylers": [
+		            {
+		                "visibility": "on"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "poi.school",
+		        "elementType": "geometry.stroke",
+		        "stylers": [
+		            {
+		                "visibility": "on"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "poi.school",
+		        "elementType": "labels.icon",
+		        "stylers": [
+		            {
+		                "visibility": "on"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "road",
+		        "elementType": "all",
+		        "stylers": [
+		            {
+		                "saturation": -100
+		            },
+		            {
+		                "lightness": 45
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "road.highway",
+		        "elementType": "all",
+		        "stylers": [
+		            {
+		                "visibility": "off"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "road.arterial",
+		        "elementType": "labels.icon",
+		        "stylers": [
+		            {
+		                "visibility": "off"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "transit",
+		        "elementType": "all",
+		        "stylers": [
+		            {
+		                "visibility": "off"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "transit.line",
+		        "elementType": "all",
+		        "stylers": [
+		            {
+		                "visibility": "on"
+		            }
+		        ]
+		    },
+		    {
+		        "featureType": "water",
+		        "elementType": "all",
+		        "stylers": [
+		            {
+		                "color": "#466BB0"
+		            },
+		            {
+		                "visibility": "on"
+		            }
+		        ]
+		    }
+		];
+		map.setOptions({styles: styles});
 	}
 	google.maps.event.addDomListener(window, 'load', initializeMap);
 
