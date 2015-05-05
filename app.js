@@ -27,6 +27,11 @@ require('./config/express')(app);
 var services = process.env.VCAP_SERVICES ? JSON.parse(process.env.VCAP_SERVICES) : require('./VCAP_SERVICES');
 
 
+// hash comparison for DEMO SPEED
+
+var hash = require('string-hash');
+
+
 // set config flags for db usage
 app.set('useTestDb', false); // the test db only has 99 records for development speed....
 
@@ -129,6 +134,10 @@ Cloudant({account:cloudant_creds.username, password:cloudant_creds.password}, fu
 app.get('/', function(req, res) {
 
   // get a count of our db records
+  if (!app.schooldb) {
+    res.render('index', {schoolCount: 435});
+    return;
+  }
 
   app.schooldb.list(function(err, docs){
     console.log('index school list:', docs.rows.length);
@@ -145,51 +154,76 @@ app.get('/', function(req, res) {
 
 app.post('/student/submit', function(req, res){
   console.log('post form:', req.body.studentSample.length);
-  // if (req.body.studentSample;)
-  app.persInsights.profile({text: req.body.studentSample}, function(err, studentPersonality){
-    console.log('got a student profile:', err, studentPersonality);
-    if (err) {
-      res.render('error', {
-        error: 'got an error, try a longer input'
-      });
-      return;
-    }
-    console.log('finding matches...');
-    // TODO matching algorithm here against all schools
-    finder.findSchools(studentPersonality, function(err, matches){
-      // console.log('potential school matches:', matches);
-      if (err) {
-        res.render('error', { error: JSON.stringify(err.error) });
-        return;
-      }
 
-      // do some munging on the student top5 compared to schools 
 
-      // prepare the tradeoff setup
-      finder.tradeoff(matches, function(err, tradeoffId){
-        // changed to return a cache to the tradeoff result run a separate cloudant db
+  // FIRST CHECK OUR HASH if we pre-ran this sample
+  var sampleHash = hash(req.body.studentSample);
+  console.log('input sample hash:', sampleHash);
+  app.tradeoffdb.get(sampleHash, function(err, data){
+    console.log('checked for previous run:', typeof err);
+    // err will be 404 for no previous run
+    if (err && err.status_code === 404) {
+      console.log('no previous run found, running analysis...');
+      // if (req.body.studentSample;)
+      app.persInsights.profile({text: req.body.studentSample}, function(err, studentPersonality){
+        console.log('got a student profile:', err, studentPersonality);
         if (err) {
-          res.render('error', { error: JSON.stringify(err.error) });
+          res.render('error', {
+            error: 'got an error, try a longer input'
+          });
           return;
         }
+        console.log('finding matches...');
+        // TODO matching algorithm here against all schools
+        finder.findSchools(studentPersonality, function(err, matches){
+          // console.log('potential school matches:', matches);
+          if (err) {
+            res.render('error', { error: JSON.stringify(err.error) });
+            return;
+          }
 
-        // res.render('response-choice', {
-        res.json({
-          matches: matches,
-          tradeoff: '/tradeoff/' + tradeoffId,
-          studentPersonality: persUtils.matches(studentPersonality) //JSON.stringify(persUtils.flatten(studentPersonality.tree), null, 4)
-        });
+          // do some munging on the student top5 compared to schools 
 
-      });
-
-      
-
-    })
-
-    
+          // prepare the tradeoff setup
+          finder.tradeoff(matches, function(err, tradeoffId){
+            // changed to return a cache to the tradeoff result run a separate cloudant db
+            if (err) {
+              res.render('error', { error: JSON.stringify(err.error) });
+              return;
+            }
 
 
-  })
+            var results = {
+              sampleId: sampleHash, // our future DB id
+              isCached: false, // this will get saved - just override when reading
+              matches: matches,
+              tradeoff: '/tradeoff/' + tradeoffId,
+              studentPersonality: persUtils.matches(studentPersonality) //JSON.stringify(persUtils.flatten(studentPersonality.tree), null, 4)
+            };
+
+            // let's cache? what should we cache really just what we are sending? need fast for demos
+            // just save and forget
+            app.tradeoffdb.insert(results, sampleHash + "", function(err, ok){  // FORCE STRING FOR CLOUDANT ID
+              console.log('cached an analysis run:', err, ok);
+            });
+            // res.render('response-choice', {
+            res.json(results); // done sending JSON back
+          }); // end tradeoff run
+        }); // end school matcher
+      }); // end personality profile run
+
+    } else if (data) {
+      // we got a cached run!
+      console.log('found a cached run:', data);
+      data.isCached = true;
+      res.json(data);
+    } else {
+
+    }
+
+  });
+
+  
 
 
 });
