@@ -21,6 +21,7 @@
 	function formatResults(data) {
 		var schoolsList = $('#results .schools');
 		var personalitiesList = $('#moreInfo .personalities');
+		var careersList = $('#moreInfo .careers');
 		var personalitiesData = [];
 
 		$.each(data.matches.sort(function(a,b) {return b.score - a.score}), function(i, school) {
@@ -71,6 +72,12 @@
 
 		});
 
+		$.each(careers[sanitiseMbti(mbti)], function(i, career) {
+			var li = $('<li/>')
+					.text(career)
+					.appendTo(careersList);
+		});
+
 		console.log(personalitiesData);
 
 		var chart = c3.generate({
@@ -80,7 +87,7 @@
 				type : 'pie'
 			}
 		});
-		
+
 		if (data.tradeoff) initTradeoff(data.tradeoff);
 
 	}
@@ -98,6 +105,46 @@
 
 		    taClient.start(callback);
 	}
+
+	function sanitiseMbti(value) {
+		var sanitised = "";
+		if (value.indexOf('E') >= 0) {
+			sanitised += 'E';
+		} if (value.indexOf('I') >= 0) {
+			sanitised += 'I';
+		} if (value.indexOf('N') >= 0) {
+			sanitised += 'N';
+		} if (value.indexOf('S') >= 0) {
+			sanitised += 'S';
+		} if (value.indexOf('F') >= 0) {
+			sanitised += 'F';
+		} if (value.indexOf('T') >= 0) {
+			sanitised += 'T';
+		} if (value.indexOf('J') >= 0) {
+			sanitised += 'J';
+		} if (value.indexOf('P') >= 0) {
+			sanitised += 'P';
+		}
+		return sanitised;
+	}
+
+	var careers = { ISTJ: ["Business Executives, Administrators and Managers", "Accountants and Financial Officers", "Police and Detectives", "Judges", "Lawyers", "Medical Doctors / Dentists", "Computer Programmers or Systems Analysts", "Military Leaders"],
+					ESTJ: ["Military leaders", "Business Administrators and Managers", "Police / Detective work", "Judges", "Financial Officers", "Teachers", "Sales Representatives"],
+					ISFJ: ["Interior Decorators", "Designers", "Nurses", "Administrators and Managers", "Administrative Assistants", "Child Care / Early Childhood Development", "Social Work / Counselors", "Paralegals", "Clergy / Religious Workers", "Office Managers", "Shopkeepers", "Bookkeepers", "Home Economics"],
+					ESFJ: ["Home Economics", "Nursing", "Teaching", "Administrators", "Child Care", "Family Practice Physician", "Clergy or other religious work", "Office Managers", "Counselors / Social Work", "Bookkeeping / Accounting", "Administrative Assistants"],
+					ISTP: ["Police and Detective Work", "Forensic Pathologists", "Computer Programmers, System Analysts", "Engineers", "Carpenters", "Mechanics", "Pilots, Drivers, Motorcyclists", "Athletes", "Entrepreneurs"],
+					ESTP: ["Sales Representatives", "Marketing Personnel", "Police / Detective Work", "Paramedic / Emergency Medical Technician", "PC Technicians or Network Cablers", "Computer Technical Support", "Entrepreneurs", "Athlete"],
+					ESFP: ["Artists, Performers and Actors", "Sales Representatives", "Counselors / Social Work", "Child Care", "Fashion Designers", "Interior Decorators", "Consultants", "Photographers"],
+					ISFP: ["Artist", "Musician / Composer", "Designer", "Child Care / Early Childhood Development", "Social Worker / Counselor", "Teacher", "Psychologist", "Veterinarian", "Forest Ranger", "Pediatrician"],
+					ENTJ: ["Corporate Executive Officer; Organization Builder", "Entrepreneur", "Computer Consultant", "Lawyer", "Judge", "Business Administrators and Managers", "University Professors and Administrators"],
+					INTJ: ["Scientists", "Engineers", "Professors and Teachers", "Medical Doctors / Dentists", "Corporate Strategists and Organization Builders", "Business Administrators / Managers", "Military Leaders", "Lawyers / Attorneys", "Judges", "Computer Programmers or Systems Analysts"],
+					ENTP: ["Lawyers", "Psychologists", "Entrepreneurs", "Photographers", "Consultants", "Engineers", "Scientists", "Actors", "Sales Representatives", "Marketing Personnel", "Computer Programmer or Systems Analyst"],
+					INTP: ["Scientists - especially Physics, Chemistry", "Photographers", "Strategic Planners", "Mathematicians", "University Professors", "Computer Programmers or Systems Analysts", "Technical Writers", "Engineers", "Lawyers / Attorneys", "Judges", "Forensic Research", "Forestry and Park Rangers"],
+					ENFJ: ["Facilitator", "Consultant", "Psychologist", "Social Worker / Counselor", "Teacher", "Clergy", "Sales Representative", "Human Resources", "Manager", "Events Coordinator", "Sales Representative", "Politicians / Diplomats", "Writers"],
+					INFJ: ["Clergy / Religious Work", "Teachers", "Medical Doctors / Dentists", "Alternative Health Care Practitioners, i.e. Chiropractor, Reflexologist", "Psychologists", "Psychiatrists", "Counselors and Social Workers", "Musicians and Artists", "Photographers", "Child Care / Early Childhood Development"],
+					ENFP: ["Consultant", "Psychologist", "Entrepreneur", "Actor", "Teacher", "Counselor", "Politician / Diplomat", "Writer / Journalist", "Television Reporter", "Computer Programmer / Systems Analyst", "Scientist", "Engineer", "Artist"],
+					INFP: ["Writers", "Counselors / Social Workers", "Teachers / Professors", "Psychologists", "Psychiatrists", "Musicians", "Clergy / Religious Workers"]
+				};
 
 	function initializeMap() {
 		var mapCanvas = document.getElementById('map-canvas');
