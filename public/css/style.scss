@@ -150,6 +150,7 @@ ul.actions {
 	li {
 		margin-left: 2.5em;
 		cursor: pointer;
+		font-size: 14px;
 		&:hover {
 			color: #00b2ef;
 		}
@@ -313,7 +314,7 @@ ul.actions {
 		bottom: 0;
 		left: 0;
 		z-index: 1;
-		background:  linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 12%, transparent 30%);
+		background:  linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 12%, transparent 30%);
 	}
 }
 
