@@ -53,6 +53,11 @@ h1 {
 	color: #fff;
 	@include textShadow;
 }
+h3 {
+	&.toggle {
+		cursor: pointer;
+	}
+}
 
 .tagline {
 	text-align: center;
@@ -61,6 +66,10 @@ h1 {
 	margin-bottom: 3em;
 	color: #fff;
 	@include textShadow;
+}
+
+#charts {
+	margin-bottom: 20px;
 }
 
 div.box {

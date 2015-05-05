@@ -22,6 +22,7 @@
 		var schoolsList = $('#results .schools');
 		var personalitiesList = $('#moreInfo .personalities');
 		var careersList = $('#moreInfo .careers');
+		var personalitiesData = [];
 
 		$.each(data.matches.sort(function(a,b) {return b.score - a.score}), function(i, school) {
 			var li = $('<li/>')
@@ -33,7 +34,7 @@
 					traitsText.push(trait.name/* + " (" + (trait.percentage*100).toFixed(2) + "%)"*/);
 				}
 			});
-			var info = $('<div/>')
+			var info = $('<p/>')
 						.text("Personality: "+traitsText.join(', '))
 						.appendTo(li);
 		});
@@ -67,12 +68,24 @@
 					mbti += personality.percentage > 0.5 ? 'J' : 'P';
 					break;
 			}
+			personalitiesData.push([personality.name, personality.percentage*100]);
+
 		});
 
 		$.each(careers[sanitiseMbti(mbti)], function(i, career) {
 			var li = $('<li/>')
 					.text(career)
 					.appendTo(careersList);
+		});
+
+		console.log(personalitiesData);
+
+		var chart = c3.generate({
+			bindto: '#charts',
+			data: {
+				columns: personalitiesData,
+				type : 'pie'
+			}
 		});
 
 		if (data.tradeoff) initTradeoff(data.tradeoff);

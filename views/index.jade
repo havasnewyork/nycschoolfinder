@@ -21,7 +21,7 @@ block row-content
     //-   li
     //-     a#pasteCorpusLink(href='javascript:void(0);')
     //-       |Write a short biography about your child, what are their interests, what are their ambitions in life. 
-    div.panel-collapse.collapse.in.well#pasteCorpus
+    div.in.well#pasteCorpus
       form.jobForm.form-horizontal(method='post', action="/student/submit")
         fieldset
           div.form-group.row
@@ -31,12 +31,47 @@ block row-content
           div.form-group.row
             div.col-lg-3.col-lg-push-9.col-xs-4
               input.btn.btn-block(type='submit', value='Analyse')
+    //- div.panel-collapse.collapse.in.well
+    //-   form(method='post', action='/student/submit')
+    //-     .row.twitter-submission
+    //-       .col-md-12
+    //-         span.h3 @
+    //-         input.paragraph.form-control(type='text', value='#{user ? user.screen_name : "" }', name='username', placeholder='your twitter handle...', required)
+    //-         button.button.h4(type='submit') Match me!
+    //-   if error
+    //-     .row
+    //-       .col-md-12
+    //-         div(role='alert').alert
+    //-         h3 Error
+    //-         p #{error}
+    //-   if warning
+    //-     .row
+    //-       .col-md-12
+    //-         div(role='alert').alert
+    //-         h3 Warning!
+    //-         p #{warning}
+    //-   if info
+    //-     .row
+    //-       .col-md-12
+    //-         div(role='alert').alert
+    //-         p #{info}
   div.info.box#results
-    h3(data-toggle="collapse") Here are some high schools that match you child's personality
-    div.panel-collapse.collapse.in
+    h3.toggle(data-toggle="collapse", href="#schools", aria-expanded="false", aria-controls="school") Here are some high schools that match you child's personality
+    div.panel-collapse.collapse.in#schools
       ol.schools
     div#taWidgetContainer
   div.info.box#moreInfo
+    h3.toggle(data-toggle="collapse", href="#personalities", aria-expanded="false", aria-controls="school") Our analysis of your child's personality
+    div.panel-collapse.collapse.in#personalities
+      ol.personalities
+      div#charts
+  //- div.foo
+  //-   a.btn.btn-primary(data-toggle="collapse", href="#collapseExample", aria-expanded="false", aria-controls="collapseExample")
+  //-     |Link with href
+  //-   button.btn.btn-primary(type="button", data-toggle="collapse", data-target="#collapseExample", aria-expanded="false", aria-controls="collapseExample")
+  //-     |Button with data-target
+  //-   div.collapse#collapseExample
+  //-     |foo
     h3(data-toggle="collapse") Our analysis of your child's personality
     div.panel-collapse.collapse.in
       ul.personalities
