@@ -43,17 +43,23 @@
 .resultTable td:first-child {
   text-align: center; }
 
+h1.span {
+  color: #3498db; }
+
 h1 {
   text-align: center;
-  font-weight: 900;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
   font-size: 3em;
-  color: #fff;
+  color: #ecf0f1;
   text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
+
 
 .tagline {
   text-align: center;
-  font-weight: 100;
-  font-size: 2em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.7em;
   margin-bottom: 3em;
   color: #fff;
   text-shadow: 0 0 0.1em rgba(0, 0, 0, 0.9); }
@@ -62,13 +68,12 @@ div.box {
   border: 3px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.9);
-  transition: opacity 0.2s; }
+  transition: opacity 0.2s;
+  margin-bottom: 1em; }
   div.box h3 {
     font-size: 1.5em;
     text-align: center;
     margin: 0.5em 0; }
-  div.box + .box {
-    margin-top: 1em; }
 
 ul.actions {
   list-style: none;
@@ -92,6 +97,57 @@ ul.actions {
   border: none; }
   #pasteCorpus textarea {
     height: 10em; }
+
+.personalities {
+  text-align: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 2em; }
+  .personalities li {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    width: 80%;
+    border-radius: 2em;
+    border: 2px solid rgba(30, 100, 220, 0.5);
+    margin: 0.5em 0;
+    color: rgba(0, 0, 0, 0.25); }
+
+.personalityScale {
+  display: inline-block;
+  width: 100%;
+  border-radius: 2em;
+  padding: 0.5em 0;
+  font-size: 1.25em; }
+  .personalityScale::before, .personalityScale::after {
+    position: absolute;
+    font-size: 0.75em;
+    line-height: 1.8em;
+    color: rgba(0, 0, 0, 0.75); }
+  .personalityScale::before {
+    left: 2em; }
+  .personalityScale::after {
+    right: 2em; }
+  .personalityScale.Openness::before {
+    content: 'Down-to-earth'; }
+  .personalityScale.Openness::after {
+    content: 'Imaginative'; }
+  .personalityScale.Conscientiousness::before {
+    content: 'Easy Going'; }
+  .personalityScale.Conscientiousness::after {
+    content: 'Organized'; }
+  .personalityScale.Emotional::before {
+    content: 'Confident'; }
+  .personalityScale.Emotional::after {
+    content: 'Sensitive'; }
+  .personalityScale.Extraversion::before {
+    content: 'Reserved'; }
+  .personalityScale.Extraversion::after {
+    content: 'Outgoing'; }
+  .personalityScale.Agreeableness::before {
+    content: 'Contrary'; }
+  .personalityScale.Agreeableness::after {
+    content: 'Accommodating'; }
 
 .map-container {
   z-index: -1;
