@@ -22,6 +22,7 @@ $(document).ready(function(){
 		var data = $( this ).serialize();
 
 		var results = $('.results').html("Performing detailed complicated analysis...").addClass('loading');
+		$("body").addClass("loading");
 
 		// console.log(data);
 		$.ajax({
@@ -33,6 +34,7 @@ $(document).ready(function(){
 				$('#results').data("schools", data);
 				$('#results').trigger('resultsReady');
 				resetForm(form);
+				$("body").removeClass("loading");
 			},
 			error: function(err) {
 				console.log('form error:', err);

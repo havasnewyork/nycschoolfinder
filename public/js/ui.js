@@ -44,8 +44,8 @@
 			var li = $('<li/>')
 					.appendTo(personalitiesList);
 			var sliderWidth = 5; // percents
-			var sliderStart = personality.percentage*100-sliderWidth/2;
-			var sliderEnd = personality.percentage*100+sliderWidth/2;
+			var sliderStart = Math.max(0, personality.percentage*100-sliderWidth/2);
+			var sliderEnd = Math.min(100, personality.percentage*100+sliderWidth/2);
 			var sliderColour = "rgba(10, 190, 239, 0.5)";
 			var item = $('<span/>')
 					.text(personality.name/* + " (" + (personality.percentage*100).toFixed(2) + "%)"*/)
@@ -103,7 +103,7 @@
 		      }
 		    }, 'taWidgetContainer');
 
-		    taClient.start(callback);
+		    taClient.start();
 	}
 
 	function sanitiseMbti(value) {

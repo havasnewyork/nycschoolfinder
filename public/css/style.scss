@@ -189,6 +189,46 @@ ul.actions {
 	}
 }
 
+#loader {
+	display: none;
+	opacity: 0;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	text-align: center;
+	transition: opacity 0.5s;
+	animation: pulse 2s ease-in-out infinite alternate;
+	.msg {
+		color: rgba(255, 255, 255, 0.5);
+		margin-top: calc(23% - 0.5em);
+		margin-left: -0.5em;
+		.throbber {
+			font-size: 15em;
+		}
+		p {
+			font-size: 2em;
+		}
+	}
+	.loading & {
+		display: block;
+		opacity: 1;
+	}
+	@keyframes pulse {
+		0% {
+			background: rgba(0, 0, 0, 0.5);
+		}
+		50% {
+			background: rgba(0, 0, 0, 0.4);
+		}
+		100% {
+			background: rgba(0, 0, 0, 0.5);
+		}
+	}
+}
+
 .map-container {
 	z-index: -1;
 	position: fixed;
