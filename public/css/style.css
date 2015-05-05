@@ -191,7 +191,8 @@ ul.actions {
     #loader .msg .throbber {
       font-size: 15em; }
     #loader .msg p {
-      font-size: 2em; }
+      font-size: 2em;
+      color: rgba(0, 0, 0, 0.5); }
   .loading #loader {
     display: block;
     opacity: 1; }
