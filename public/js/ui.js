@@ -93,7 +93,33 @@
 	}
 
 	var taClient;
+
+	var onResultReady = function() {
+		console.log('onResultReady');
+		taClient.resize();
+	  // $('.ta-result').show();
+	  // $( '.ta-loading').hide();
+	  // $.modal.resize();
+	  // taClient.resize();
+	};
+
+	var onResultSelection = function(place) {
+		console.log('onResultSelection:', place);
+		
+		// this is fired when you choose a solution
+
+
+	  // if (place) {
+	  //   $('.location-id').val(JSON.stringify(place));
+	  //   $('.location-form').submit();
+	  // } else {
+	  //   $.modal.close();
+	  // }
+	};
+
+
 	function initTradeoff(tradeoffData) {
+		// console.log('tradeoff json:', window.location.protocol + "//" + window.location.hostname + tradeoffData);
 		taClient = new TradeoffAnalytics({
 		      dilemmaServiceUrl: tradeoffData,
 		      customCssUrl: 'https://ta-cdn.mybluemix.net/modmt/styles/watson.css',
@@ -103,8 +129,16 @@
 		      }
 		    }, 'taWidgetContainer');
 
-		    taClient.start();
+		    taClient.start(function(){
+		    	$.get(tradeoffData, function(data){
+		    		taClient.show(data.problem, onResultReady, onResultSelection);
+		    	});	
+		    });
+		    
+		    
 	}
+
+
 
 	function sanitiseMbti(value) {
 		var sanitised = "";
@@ -276,3 +310,18 @@
 	google.maps.event.addDomListener(window, 'load', initializeMap);
 
 })();
+
+
+
+
+
+// test method to debug
+	function getTaLibRoot(){
+		for(var i=0; i<document.scripts.length; i++){
+			var src = document.scripts[i].src;
+			var index = src.indexOf("TradeoffAnalytics.js");
+			if(index>=0){
+				return src.substring(0, index);
+			}
+		}
+	}

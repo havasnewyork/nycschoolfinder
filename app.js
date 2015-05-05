@@ -20,7 +20,10 @@ var express = require('express'),
   app = express(),
   watson = require('watson-developer-cloud'),
   bluemix = require('./config/bluemix'),
+  cors = require('cors'),
   extend = require('util')._extend;
+
+
 
 // Bootstrap application settings
 require('./config/express')(app);
@@ -34,6 +37,7 @@ var hash = require('string-hash');
 
 // set config flags for db usage
 app.set('useTestDb', false); // the test db only has 99 records for development speed....
+app.use(cors());
 
 // // if bluemix credentials exists, then override local
 // var credentials = extend({
@@ -162,7 +166,8 @@ app.post('/student/submit', function(req, res){
   app.tradeoffdb.get(sampleHash, function(err, data){
     console.log('checked for previous run:', typeof err);
     // err will be 404 for no previous run
-    if (err && err.status_code === 404) {
+    // if (err && err.status_code === 404) {
+    if (true) { // temp avoid cache
       console.log('no previous run found, running analysis...');
       // if (req.body.studentSample;)
       app.persInsights.profile({text: req.body.studentSample}, function(err, studentPersonality){
@@ -185,18 +190,18 @@ app.post('/student/submit', function(req, res){
           // do some munging on the student top5 compared to schools 
 
           // prepare the tradeoff setup
-          finder.tradeoff(matches, function(err, tradeoffId){
+          finder.tradeoff(matches, function(err, finalMatchData){ // now returns an object with matches that had enough data to tradeoff analyze...
             // changed to return a cache to the tradeoff result run a separate cloudant db
             if (err) {
               res.render('error', { error: JSON.stringify(err.error) });
               return;
             }
-
+            var tradeoffId = finalMatchData.tradeoffId;
 
             var results = {
               sampleId: sampleHash, // our future DB id
               isCached: false, // this will get saved - just override when reading
-              matches: matches,
+              matches: finalMatchData.matches, // JUST WHAT IS USED IN TRADEOFF PLZ
               tradeoff: '/tradeoff/' + tradeoffId,
               studentPersonality: persUtils.matches(studentPersonality) //JSON.stringify(persUtils.flatten(studentPersonality.tree), null, 4)
             };
@@ -218,7 +223,8 @@ app.post('/student/submit', function(req, res){
       data.isCached = true;
       res.json(data);
     } else {
-
+      console.log('no cached run and no data, fubar');
+      res.render('error', { error: "no cached analysis found, no data sent, cant analyze anything" });
     }
 
   });
@@ -228,12 +234,17 @@ app.post('/student/submit', function(req, res){
 
 });
 
-app.get('/tradeoff/:id', function(req, res){
+function getTradeoff(req, res){
+  // CORS PLZ this is called from the iframe
+  console.log("TRADEOFF REQUEST:", req.params.id);
   app.tradeoffdb.get(req.params.id, function(err, tradeoffData){
     console.log('got a tradeoff:', err, tradeoffData);
     res.json(tradeoffData);
   });
-});
+}
+
+app.get('/tradeoff/:id', getTradeoff);
+app.post('/tradeoff/:id', getTradeoff);
 
 app.post('/schools/compare', function(req, res) {
   // set up a tradeoff analytics from a set of schools
