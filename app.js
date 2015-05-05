@@ -97,6 +97,7 @@ Cloudant({account:cloudant_creds.username, password:cloudant_creds.password}, fu
   if (app.get('useTestDb')) dbname += "_test";
   console.log('using db:', dbname);
   app.schooldb = cloudant.use(dbname);
+  app.tradeoffdb = cloudant.use('tradeoffs');
 
   // should put a check to see last date of analysis - no for hthon
   // console.log('starting school-analyzer:');
@@ -165,8 +166,8 @@ app.post('/student/submit', function(req, res){
       // do some munging on the student top5 compared to schools 
 
       // prepare the tradeoff setup
-      finder.tradeoff(matches, function(err, tradeoff){
-
+      finder.tradeoff(matches, function(err, tradeoffId){
+        // changed to return a cache to the tradeoff result run a separate cloudant db
         if (err) {
           res.render('error', { error: err.error });
           return;
@@ -175,7 +176,7 @@ app.post('/student/submit', function(req, res){
         // res.render('response-choice', {
         res.json({
           matches: matches,
-          tradeoff: tradeoff,
+          tradeoff: '/tradeoff/' + tradeoffId,
           studentPersonality: persUtils.matches(studentPersonality) //JSON.stringify(persUtils.flatten(studentPersonality.tree), null, 4)
         });
 
@@ -191,6 +192,13 @@ app.post('/student/submit', function(req, res){
   })
 
 
+});
+
+app.get('/tradeoff/:id', function(req, res){
+  app.tradeoffdb.get(req.params.id, function(err, tradeoffData){
+    console.log('got a tradeoff:', err, tradeoffData);
+    res.json(tradeoffData);
+  });
 });
 
 app.post('/schools/compare', function(req, res) {

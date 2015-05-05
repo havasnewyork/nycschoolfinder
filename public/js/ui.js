@@ -52,6 +52,23 @@
 					.css('background', 'linear-gradient(to right, transparent '+sliderStart+'%, '+sliderColour+' '+sliderStart+'%, '+sliderColour+' '+sliderEnd+'%, transparent '+sliderEnd+'%)')
 					.appendTo(li);
 		});
+
+		if (data.tradeoff) initTradeoff(data.tradeoff);
+
+	}
+
+	var taClient;
+	function initTradeoff(tradeoffData) {
+		taClient = new TradeoffAnalytics({
+		      dilemmaServiceUrl: tradeoffData,
+		      customCssUrl: 'https://ta-cdn.mybluemix.net/modmt/styles/watson.css',
+		      profile: 'basic',
+		      errCallback: function(err){
+		      	console.log('tradeoff init error:', err);
+		      }
+		    }, 'taWidgetContainer');
+
+		    taClient.start(callback);
 	}
 
 	function initializeMap() {
