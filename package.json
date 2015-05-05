@@ -10,6 +10,7 @@
     "express": "~4.11.2",
     "jade": "~1.9.2",
     "request": "^2.55.0",
+    "string-hash": "^1.1.0",
     "underscore": "^1.8.3",
     "watson-developer-cloud": "^0.9.9"
   },
