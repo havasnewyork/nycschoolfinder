@@ -10,8 +10,7 @@
 
 	function showResults() {
 		$('#pasteCorpus').collapse();
-		$('#results').css('display', 'block').css('opacity', '1');
-		$('#moreInfo').css('display', 'block').css('opacity', '1');
+		$('#results, #moreInfo, #tradeOff').css('display', 'block').css('opacity', '1');
 
 		formatResults($('#results').data("schools"));
 	}
@@ -22,7 +21,6 @@
 		var schoolsList = $('#results .schools');
 		var personalitiesList = $('#results .personalities');
 		var careersList = $('#moreInfo .careers');
-		var personalitiesData = [];
 
 		schoolsList.empty();
 		personalitiesList.empty();
@@ -91,7 +89,6 @@
 					mbti += personality.percentage > 0.5 ? 'J' : 'P';
 					break;
 			}
-			personalitiesData.push([personality.name, personality.percentage*100]);
 
 		});
 
@@ -101,15 +98,6 @@
 					.appendTo(careersList);
 		});
 
-		console.log(personalitiesData);
-
-		var chart = c3.generate({
-			bindto: '#charts',
-			data: {
-				columns: personalitiesData,
-				type : 'pie'
-			}
-		});
 
 		if (data.tradeoff) initTradeoff(data.tradeoff);
 

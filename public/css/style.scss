@@ -82,7 +82,7 @@ div.box {
 	h3 {
 		font-size: 1.5em;
 		text-align: center;
-		margin: 0.5em 0;
+		margin: 1em 0 0.5em;
 	}
 	+ .box {
 	}
@@ -118,13 +118,48 @@ ul.actions {
 	}
 }
 
-#results, #moreInfo {
+#results, #moreInfo, #tradeOff {
 	display: none;
 	opacity: 0;
 }
 
+#taWidgetContainer {
+	margin-top: 1.5em;
+}
+
+#schools, #careers {
+	padding: 1em 2em;
+	span {
+		font-size: 12px;
+		padding-left: 1.4em;
+	}
+}
+.two-col-list {
+	margin: 0.3em 0 1em;
+	-moz-column-count: 2;
+	-moz-column-gap: 1.5em;
+	-webkit-column-count: 2;
+	-webkit-column-gap: 1.5em;
+	column-count: 2;
+	column-gap: 1.5em;
+	padding: 0;
+	font-size: 14px;
+}
 .schools {
-	margin-bottom: 1em;
+	@extend .two-col-list;
+	li {
+		margin-left: 2.5em;
+		cursor: pointer;
+		&:hover {
+			color: #00b2ef;
+		}
+	}
+}
+.careers {
+	@extend .two-col-list;
+	li {
+		margin-left: 2.5em;
+	}
 }
 
 .personalities {
