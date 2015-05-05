@@ -165,12 +165,12 @@ ul.actions {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   transition: opacity 0.5s;
   animation: pulse 2s ease-in-out infinite alternate; }
   #loader .msg {
-    color: rgba(255, 255, 255, 0.5);
+    color: #999;
     margin-top: calc(23% - 0.5em);
     margin-left: -0.5em; }
     #loader .msg .throbber {
