@@ -33,7 +33,7 @@
 					traitsText.push(trait.name/* + " (" + (trait.percentage*100).toFixed(2) + "%)"*/);
 				}
 			});
-			var info = $('<p/>')
+			var info = $('<div/>')
 						.text("Personality: "+traitsText.join(', '))
 						.appendTo(li);
 		});
@@ -74,6 +74,23 @@
 					.text(career)
 					.appendTo(careersList);
 		});
+
+		if (data.tradeoff) initTradeoff(data.tradeoff);
+
+	}
+
+	var taClient;
+	function initTradeoff(tradeoffData) {
+		taClient = new TradeoffAnalytics({
+		      dilemmaServiceUrl: tradeoffData,
+		      customCssUrl: 'https://ta-cdn.mybluemix.net/modmt/styles/watson.css',
+		      profile: 'basic',
+		      errCallback: function(err){
+		      	console.log('tradeoff init error:', err);
+		      }
+		    }, 'taWidgetContainer');
+
+		    taClient.start(callback);
 	}
 
 	function sanitiseMbti(value) {
