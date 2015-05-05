@@ -100,7 +100,17 @@ Cloudant({account:cloudant_creds.username, password:cloudant_creds.password}, fu
 
   // should put a check to see last date of analysis - no for hthon
   // console.log('starting school-analyzer:');
-  // analyzer.run(); // DO NOT RUN ALL THE TIME
+  // analyzer.run(); // DO NOT RUN ALL THE TIME - set a command-line flag
+  console.log("analyze?", process.argv);
+  if (process.argv.length > 2) {
+    console.log('checking command line flag to run analyzer:', process.argv);
+    if (process.argv[2] === 'analyze') {
+      analyzer.run();
+    }
+    if (process.argv[2] === 'mergePerformance') {
+      analyzer.runPerformance();
+    }
+  }
 
   // TODO check the database to see if an initial analyzer run needs to be performed
 
