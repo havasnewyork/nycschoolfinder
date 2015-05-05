@@ -19,6 +19,19 @@
 	function formatResults(data) {
 		if (!data) return;
 		console.log('RESULTS are they cached? ', data.sampleId, data.isCached);
+
+		// if cached delay $("body").removeClass("loading");
+
+		if (data.isCached) {
+			data.isCached = false; // to avoid the timeout next time
+			setTimeout(function(){
+				formatResults(data);
+			}, 3000);
+			return;
+		}
+		$("body").removeClass("loading");
+	
+
 		var schoolsList = $('#results .schools');
 		var personalitiesList = $('#results .personalities');
 		var careersList = $('#moreInfo .careers');

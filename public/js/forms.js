@@ -35,7 +35,7 @@ $(document).ready(function(){
 				$('#results').data("schools", data);
 				$('#results').trigger('resultsReady');
 				resetForm(form);
-				$("body").removeClass("loading");
+				
 			},
 			error: function(err) {
 				console.log('form error:', err);
