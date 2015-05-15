@@ -15,7 +15,7 @@ var express = require('express'),
 
 // FOR LOCAL DEVELOPMENT PUT A COPY OF THE VCAP_SERVICES BLUEMIX ENVIRONMENT INTO VCAP_SERVICES.json
 require('./config/express')(app);
-var services = process.env.VCAP_SERVICES ? JSON.parse(process.env.VCAP_SERVICES) : require('./VCAP_SERVICES');
+var services = process.env.VCAP_SERVICES ? JSON.parse(process.env.VCAP_SERVICES) : require('./VCAP_SERVICES-local');
 
 
 // hash comparison for DEMO SPEED
@@ -42,20 +42,24 @@ app.use(cors());
 // ce_creds.version = 'v1';
 // var concept_expansion = watson.concept_expansion(ce_creds);
 
-var re_creds = bluemix.getServiceCreds('relationship_extraction', services);
-// console.log(re_creds);
-re_creds.version = 'v1';
+// var re_creds = bluemix.getServiceCreds('relationship_extraction', services);
+// // console.log(re_creds);
+// re_creds.version = 'v1';
 
 
-var qa_creds = bluemix.getServiceCreds('question_and_answer', services);
-// console.log(qa_creds);
-qa_creds.version = 'v1';
+// var qa_creds = bluemix.getServiceCreds('question_and_answer', services);
+// // console.log(qa_creds);
+// qa_creds.version = 'v1';
 
 
 
 var pers_creds = bluemix.getServiceCreds('personality_insights', services);
 // console.log(qa_creds);
 pers_creds.version = 'v2';
+// specific credentials required for demo
+pers_creds.use_vcap_services = false;
+pers_creds.username = "275e5835-1cf1-4e6e-b443-88d82ee1dcd4";
+pers_creds.password = "XZ84g7B7GEpM";
 
 
 
@@ -65,13 +69,7 @@ tradeoff_creds.version = 'v1';
 
 
 
-
-
-var relationship_extraction = watson.relationship_extraction(re_creds);
-var question_answer = watson.question_and_answer(qa_creds);
 app.persInsights = watson.personality_insights(pers_creds);
-
-
 app.tradeoffAnalytics = watson.tradeoff_analytics(tradeoff_creds);  // .dilemmas({columns, subject, options})
 
 var analyzer = require('./lib/school-analyzer')(app);
