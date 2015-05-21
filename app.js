@@ -56,10 +56,10 @@ app.use(cors());
 var pers_creds = bluemix.getServiceCreds('personality_insights', services);
 // console.log(qa_creds);
 pers_creds.version = 'v2';
-// specific credentials required for demo
-pers_creds.use_vcap_services = false;
-pers_creds.username = "275e5835-1cf1-4e6e-b443-88d82ee1dcd4";
-pers_creds.password = "XZ84g7B7GEpM";
+// specific credentials required for demo - didn't work
+// pers_creds.use_vcap_services = false;
+// pers_creds.username = "275e5835-1cf1-4e6e-b443-88d82ee1dcd4";
+// pers_creds.password = "XZ84g7B7GEpM";
 
 
 
@@ -148,16 +148,17 @@ app.post('/student/submit', function(req, res){
   // if (req.body.studentSample.length < 100)
 
   // FIRST CHECK OUR HASH if we pre-ran this sample
-  var sampleHash = hash(req.body.studentSample);
+  var studentSample = req.body.studentSample;
+  var sampleHash = hash(studentSample);
   console.log('input sample hash:', sampleHash);
   app.tradeoffdb.get(sampleHash, function(err, data){
     console.log('checked for previous run:', typeof err);
     // err will be 404 for no previous run
     if (err && err.status_code === 404) {
     // if (true) { // temp avoid cache
-      console.log('no previous run found, running analysis...');
+      console.log('no previous run found, running analysis...', studentSample.length);
       // if (req.body.studentSample;)
-      app.persInsights.profile({text: req.body.studentSample}, function(err, studentPersonality){
+      app.persInsights.profile({text: studentSample}, function(err, studentPersonality){
         console.log('got a student profile:', err, studentPersonality);
         if (err) {
           res.status(500);
