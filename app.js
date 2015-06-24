@@ -173,6 +173,7 @@ app.post('/student/submit', function(req, res){
           // console.log('potential school matches:', matches);
           if (err) {
             res.status(500);
+            console.log('finder.findSchools err:', err);
             res.render('error', { error: JSON.stringify(err.error) });
             return;
           }
@@ -184,6 +185,7 @@ app.post('/student/submit', function(req, res){
             // changed to return a cache to the tradeoff result run a separate cloudant db
             if (err) {
               res.status(500);
+              console.log('finder.tradeoff err:', err);
               res.render('error', { error: JSON.stringify(err.error) });
               return;
             }

@@ -150,7 +150,7 @@
 		// console.log('tradeoff json:', window.location.protocol + "//" + window.location.hostname + tradeoffData);
 		taClient = new TradeoffAnalytics({
 		      dilemmaServiceUrl: tradeoffData,
-		      customCssUrl: 'https://ta-cdn.mybluemix.net/modmt/styles/watson.css',
+		      customCssUrl: 'https://ta-cdn.mybluemix.net/v1/modmt/styles/watson.css',
 		      profile: 'basic',
 		      errCallback: function(err){
 		      	console.log('tradeoff init error:', err);
