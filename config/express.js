@@ -19,25 +19,20 @@
 // Module dependencies
 var express    = require('express'),
   errorhandler = require('errorhandler'),
-  bodyParser   = require('body-parser');
-var serveIndex = require('serve-index')
-
-
-  // directory     = require('express-directory');
+  bodyParser   = require('body-parser'),
+  serveIndex   = require('serve-index');
 
 module.exports = function (app) {
 
   // Configure Express
-  app.use(bodyParser({limit: '50mb'})); 
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({limit: '50mb'}));
 
   // Setup static public directory
   app.use(express.static(__dirname + '/../public'));
   app.use('/samples', serveIndex(__dirname + '/../samples'));
   app.use('/samples', express.static(__dirname + '/../samples'));
-  
-  // app.use('/samples', directory);
+
   app.set('view engine', 'jade');
   app.set('views', __dirname + '/../views');
 
@@ -45,5 +40,4 @@ module.exports = function (app) {
   if ('development' === app.get('env')) {
     app.use(errorhandler());
   }
-
 };

@@ -9,6 +9,6 @@ block row-content
         //- li= JSON.stringify(match) -- match object here corresponds to the matches pushed in school-finder.js - match.doc provides full access to all school fields
         li= match.score + " score for " + match.school_name + " (" + match.id + ") coords:" + match.doc.location_1.latitude + ":" + match.doc.location_1.longitude
         li
-            pre= JSON.stringify(match.traits, null, 4)
+          pre= JSON.stringify(match.traits, null, 4)
     h2 Here is a personality result
     pre= studentPersonality

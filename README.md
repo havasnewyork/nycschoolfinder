@@ -21,6 +21,59 @@
 
 6. Uses personality insights to generate suggested careers based on existing personality to career research
 
+## Running locally
+  The application uses [Node.js](http://nodejs.org/) and [npm](https://www.npmjs.com/) so you will have to download and install them as part of the steps below.
+
+1. Copy the credentials from your `VCAP_SERVICES` service in Bluemix to `VCAP_SERVICES.json`, you can see the credentials using:
+
+    ```sh
+    $ cf env <application-name>
+    ```
+    Example output:
+    ```sh
+    System-Provided:
+    {
+    "VCAP_SERVICES": {
+      "personality_insights": [{
+          "credentials": {
+            "url": "<url>",
+            "password": "<password>",
+            "username": "<username>"
+          },
+        "label": "personality_insights",
+        "name": "personality-insights-service",
+        "plan": "IBM Watson Personality Insights Monthly Plan"
+     }]
+    }
+    }
+    ```
+
+    You need to copy the credentials for Personality Insights, Tradeoff Analytics and Cloudant.
+
+2. Install [Node.js](http://nodejs.org/)
+3. Go to the project folder in a terminal and run:
+4. Install the dependencies
+    ```
+    $ npm install
+    ```
+
+
+5. Go to https://cloudant.com/ and use the credentials from the `VCAP_SERVICES` to create two databases: `schools` and `tradeoffs`.
+
+6. Popule the databases with school information
+   ```
+   $ run node app.js analyze
+   $ run node app.js mergePerformance
+   ```
+     That will populate the schools database.
+
+6. Start the application
+   ```
+   $ run node app.js
+   ```
+
+7. Go to `http://localhost:3000`
+
 ## Team
 
 * Jeronimo De Leon
@@ -30,10 +83,8 @@
 
 ### HOW TO WIN HACKATHONS
 
-1. Make sure your demo is FAST. If any processing is too slow, CACHE IT.
-
+1. Make sure your demo is FAST. If any processing is too slow, CACHE IT.  
 2. Make a rad intro video.
-
 
 [hackathon]: http://ibmwatsonhackathon.challengepost.com
 [demo]: http://nycschoolfinder.mybluemix.net

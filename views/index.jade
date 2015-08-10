@@ -8,19 +8,6 @@ block row-content
   h3.tagline We&rsquo;ve analyzed #{schoolCount} High Schools in New York City. Find the right one for your child.
   div.panel.panel-default.action.box#personalityEntry
     h3.toggle(data-toggle="collapse", href="#pasteCorpus", aria-expanded="false", aria-controls="school") Let&rsquo;s get to know your child&rsquo;s personality.
-    //- ul.actions
-    //-   li.facebook
-    //-     a(href='javascript:void(0);')
-    //-       i.fa.fa-facebook
-    //-       p.alt Facebook
-    //-   li.twitter 
-    //-     a(href='javascript:void(0);')
-    //-       i.fa.fa-twitter
-    //-       p.alt Twitter
-    //-   li.extra or
-    //-   li
-    //-     a#pasteCorpusLink(href='javascript:void(0);')
-    //-       |Write a short biography about your child, what are their interests, what are their ambitions in life. 
     div.panel-collapse.collapse.in.well#pasteCorpus
       form.jobForm.form-horizontal(method='post', action="/student/submit")
         fieldset
@@ -35,43 +22,11 @@ block row-content
               input.btn.btn-block(type='submit', value='Analyse')
           div.form-group.row
             div#form-error
-    //- div.panel-collapse.collapse.in.well
-    //-   form(method='post', action='/student/submit')
-    //-     .row.twitter-submission
-    //-       .col-md-12
-    //-         span.h3 @
-    //-         input.paragraph.form-control(type='text', value='#{user ? user.screen_name : "" }', name='username', placeholder='your twitter handle...', required)
-    //-         button.button.h4(type='submit') Match me!
-    //-   if error
-    //-     .row
-    //-       .col-md-12
-    //-         div(role='alert').alert
-    //-         h3 Error
-    //-         p #{error}
-    //-   if warning
-    //-     .row
-    //-       .col-md-12
-    //-         div(role='alert').alert
-    //-         h3 Warning!
-    //-         p #{warning}
-    //-   if info
-    //-     .row
-    //-       .col-md-12
-    //-         div(role='alert').alert
-    //-         p #{info}
   div.info.box#results
     h3.toggle(data-toggle="collapse", href="#personalities", aria-expanded="false", aria-controls="school") Here are the results of your child&rsquo;s analysis, compared to top matching schools.
     //- Here are the top high schools that match you child&rsquo;s personality
     div.panel-collapse.collapse.in#personalities
       ul.personalities
-      //- div#charts
-      //- div.foo
-      //-   a.btn.btn-primary(data-toggle="collapse", href="#collapseExample", aria-expanded="false", aria-controls="collapseExample")
-      //-     |Link with href
-      //-   button.btn.btn-primary(type="button", data-toggle="collapse", data-target="#collapseExample", aria-expanded="false", aria-controls="collapseExample")
-      //-     |Button with data-target
-      //-   div.collapse#collapseExample
-      //-     |foo
       div#schools
         ol.schools
   div.info.box#tradeOff
