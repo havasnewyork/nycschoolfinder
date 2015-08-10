@@ -86,5 +86,9 @@
 1. Make sure your demo is FAST. If any processing is too slow, CACHE IT.  
 2. Make a rad intro video.
 
+## License
+
+See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
+
 [hackathon]: http://ibmwatsonhackathon.challengepost.com
 [demo]: http://nycschoolfinder.mybluemix.net

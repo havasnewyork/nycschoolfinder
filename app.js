@@ -42,7 +42,6 @@ cloudant({
   if (err)
     return console.log('Error connecting to Cloudant account %s: %s', err.message);
 
-  console.log('Connected to cloudant', app.get('useTestDb'));
   var dbname = 'schools';
   if (app.get('useTestDb'))
     dbname += '_test';
