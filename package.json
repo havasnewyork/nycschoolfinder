@@ -1,6 +1,6 @@
 {
   "name": "NYCSchoolFinder",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "NYCSchoolFinder - Watson Hackathon Project",
   "dependencies": {
     "async": "^1.4.2",
