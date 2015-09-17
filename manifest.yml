@@ -1,13 +1,21 @@
 
 ---
 declared-services:
-  concept-expansion-service:
-    label: concept_expansion
-    plan: concept_expansion_free_plan
+  cloudant:
+    label: cloudantNoSQLDB
+    plan: Shared
+  personality-insights-service-standard:
+    label: personality_insights
+    plan: standard
+  tradeoff-analytics-standard-service:
+    label: tradeoff_analytics
+    plan: standard
 applications:
 - services:
-  - concept-expansion-service
+  - personality-insights-service
+  - tradeoff-analytics-service
+  - cloudant
   name: nycschoolfinder
   command: node app.js
   path: .
-  memory: 256M
+  memory: 512M
